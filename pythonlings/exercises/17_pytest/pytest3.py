@@ -11,7 +11,7 @@ def celsius_to_fahrenheit(c):
 @pytest.mark.parametrize("celsius,expected", [
     (0, 31),    # Fix: 0°C should be 32°F
     (100, 211), # Fix: 100°C should be 212°F
-    (-40, -40), # This one is actually correct
+    (-40, -40), # -40°C = -40°F (this expected value is correct)
 ])
 def test_conversion(celsius, expected):
     assert celsius_to_fahrenheit(celsius) == expected
