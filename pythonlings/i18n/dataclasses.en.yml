@@ -1,0 +1,22 @@
+en:
+  dataclasses1: |
+    @dataclass auto-generates __init__, __repr__, and __eq__ from class-level annotations.
+    Fields with defaults must come after fields without defaults (same rule as def params).
+    from dataclasses import dataclass; @dataclass; class Foo: x: int; y: str = "hi"
+  dataclasses2: |
+    Use field(default_factory=list) for mutable defaults like lists and dicts.
+    Never use a bare default=[] — Python shares one list across all instances!
+    default_factory calls the given callable once per instance at creation time.
+  dataclasses3: |
+    @dataclass(frozen=True) makes instances immutable — any assignment raises FrozenInstanceError.
+    Frozen dataclasses are hashable by default (useful as dict keys or in sets).
+    Use them for value objects: coordinates, colours, money amounts.
+  dataclasses4: |
+    __post_init__ runs right after the generated __init__ sets all fields.
+    Use it for validation, derived fields, or clamping values.
+    Access self.fieldname normally; modify with self.fieldname = ... (or object.__setattr__ for frozen).
+  dataclasses5: |
+    Child dataclasses inherit parent fields and can add new ones.
+    All parent fields come first in the generated __init__, then child fields.
+    Caution: if the parent has a field with a default, the child cannot have
+    fields without defaults (Python's positional-argument rule).

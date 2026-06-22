@@ -1,0 +1,22 @@
+en:
+  type_hints1: |
+    Type annotations document what types a function expects and returns.
+    Syntax: def func(param: int) -> str:
+    They don't enforce types at runtime but help editors and type-checkers.
+  type_hints2: |
+    Python 3.10+ allows X | Y union syntax instead of Union[X, Y].
+    Use int | None instead of Optional[int].
+    This also works in isinstance(): isinstance(x, int | float).
+  type_hints3: |
+    TypeVar creates a placeholder type variable for generic functions.
+    T = TypeVar("T"); def first(items: list[T]) -> T: ...
+    This tells type-checkers: "if you pass list[str], you get back str".
+  type_hints4: |
+    TypedDict creates a dict subtype with specific required keys and value types.
+    from typing import TypedDict
+    class Movie(TypedDict): title: str; year: int
+    Great for typing JSON-like data without full dataclass overhead.
+  type_hints5: |
+    NamedTuple combines the positional access of tuples with named attributes.
+    class Point(NamedTuple): x: float; y: float
+    Instances are immutable (like tuples) and support both p.x and p[0].

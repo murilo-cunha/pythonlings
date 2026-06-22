@@ -1,0 +1,21 @@
+en:
+  decorators1: |
+    A decorator is a function that takes a function and returns a new function.
+    The wrapper calls the original func and can transform its return value.
+    Syntax: def decorator(func): def wrapper(...): ... return wrapper
+  decorators2: |
+    Without @functools.wraps(func), the wrapper loses the original function's
+    __name__, __doc__, and other metadata. Always use @functools.wraps when
+    writing decorators to preserve introspection.
+  decorators3: |
+    A decorator factory is a function that accepts arguments and returns a decorator.
+    Pattern: def repeat(n): def decorator(func): def wrapper(*a,**kw): ... return wrapper
+    Usage: @repeat(3) — the outer call produces the actual decorator.
+  decorators4: |
+    @property turns a method into a read-only attribute.
+    Add a setter with @name.setter to allow assignment.
+    Use properties to add validation logic while keeping a clean attribute API.
+  decorators5: |
+    Decorators stack bottom-up: the decorator closest to def runs first.
+    @A @B def f(): ... is equivalent to f = A(B(f)).
+    So calling f() runs A's wrapper, which calls B's wrapper, which calls the original f.
