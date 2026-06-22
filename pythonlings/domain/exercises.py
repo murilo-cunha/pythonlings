@@ -4,11 +4,8 @@ import sys
 from abc import ABC, abstractmethod
 
 import i18n
-from rich.console import Console
 
 _ = i18n.t
-
-console = Console()
 
 
 class BaseExercise(ABC):
