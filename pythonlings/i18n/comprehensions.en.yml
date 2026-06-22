@@ -1,0 +1,21 @@
+en:
+  comprehensions1: |
+    List comprehensions: [expression for item in iterable if condition]
+    They're more concise and often faster than equivalent for-loops.
+    Read them left to right: "give me n**2 for each n in numbers where n is even".
+  comprehensions2: |
+    Dict comprehensions: {key_expr: value_expr for item in iterable}
+    Use them to build dicts from sequences without a loop + .update().
+  comprehensions3: |
+    Set comprehensions: {expression for item in iterable}
+    Like list comprehensions but produce a set (deduplication is automatic).
+    The only difference from a list comprehension is the curly braces.
+  comprehensions4: |
+    Generator expressions look like list comprehensions but use () instead of [].
+    They don't build the whole list in memory — they produce values lazily on demand.
+    Use them when you only need to iterate once or when the sequence is large.
+  comprehensions5: |
+    Nested comprehensions: [expr for outer in iterable for inner in outer]
+    Read left to right — each "for" clause is a nested loop.
+    They're powerful for flattening and transposing, but avoid deeply nesting
+    more than 2 levels as readability drops quickly.

@@ -1,0 +1,17 @@
+en:
+  generators1: |
+    A generator function uses yield instead of return.
+    Calling it returns a generator object; values are produced lazily one at a time.
+    Python pauses at each yield and resumes when next() is called again.
+  generators2: |
+    "yield from iterable" delegates to another iterable, yielding each of its items.
+    It's equivalent to: for item in iterable: yield item
+    Also works with other generators, flattening them without extra loops.
+  generators3: |
+    To make a class iterable, implement __iter__ (returns self) and __next__
+    (returns the next value, raises StopIteration when exhausted).
+    for x in obj: calls iter(obj) then repeatedly calls next() until StopIteration.
+  generators4: |
+    Generators can be infinite — just never stop yielding.
+    Use itertools.islice(gen, n) to take only the first n values without consuming the rest.
+    Infinite generators are great for sequences like natural numbers, random streams, events.
