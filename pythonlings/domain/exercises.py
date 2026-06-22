@@ -1,11 +1,14 @@
 import os
 import subprocess as subp
+import sys
 from abc import ABC, abstractmethod
 
 import i18n
-from colorama import Fore
+from rich.console import Console
 
 _ = i18n.t
+
+console = Console()
 
 
 class BaseExercise(ABC):
@@ -40,17 +43,14 @@ class Exercise:
 
     def __str__(self) -> str:
         hint = _(f'{self.package}.{self.name}')
-        error_msg = f""""{self.fp} {Fore.RED}[{_('p.error_flag')}]
-        {Fore.GREEN}
+        error_msg = f""""{self.fp} [{_('p.error_flag')}]
         {hint}
-        {Fore.RESET}
         {self.output}
         """
-        success_msg = f"""{self.fp} {Fore.GREEN}[{_('p.success_flag')}]!{Fore.RESET}
+        success_msg = f"""{self.fp} [{_('p.success_flag')}]!
         """
-        makeitpass_msg = f""""{self.fp} {Fore.CYAN}[{_('p.make_it_pass_flag')}]!
-        {Fore.GREEN}
-        {hint}{Fore.RESET}
+        makeitpass_msg = f""""{self.fp} [{_('p.make_it_pass_flag')}]!
+        {hint}
         """
         if self.to_do:
             return makeitpass_msg
@@ -72,7 +72,7 @@ class Exercise:
     def process(self) -> None:
         if self.is_not_done():
             return
-        command = ["python", self.fp]
+        command = [sys.executable, self.fp]
         r = subp.run(command, stdout=subp.PIPE, stderr=subp.PIPE)
         self.error = bool(r.returncode)
         self.output = r.stderr if self.error else r.stdout
