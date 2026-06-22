@@ -1,0 +1,19 @@
+en:
+  error_handling1: |
+    try runs the risky code. except catches specific exceptions.
+    else runs only if NO exception was raised. finally ALWAYS runs (cleanup).
+    A common pattern: try: result = op() except SomeError: handle() else: use(result) finally: cleanup()
+  error_handling2: |
+    Custom exceptions inherit from built-in exception classes (ValueError, RuntimeError, etc.).
+    Add __init__ to attach structured data (field name, error code, etc.).
+    Raising specific exception types lets callers catch exactly what they expect.
+  error_handling3: |
+    raise NewError() from original links the exceptions.
+    The original becomes e.__cause__ and is shown in the traceback.
+    Use "from e" when translating low-level exceptions to higher-level ones.
+    Use "from None" to suppress the chain when the original is an implementation detail.
+  error_handling4: |
+    ExceptionGroup (Python 3.11+) groups multiple exceptions raised at once.
+    raise ExceptionGroup("label", [err1, err2])
+    Catch with "except* SomeError as eg:" to handle each type independently.
+    Useful for validation that should report ALL failures, not just the first one.
