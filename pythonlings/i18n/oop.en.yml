@@ -1,0 +1,23 @@
+en:
+  oop1: |
+    __repr__ should return an unambiguous developer-facing string (e.g. MyClass(arg)).
+    __str__ returns a user-friendly display string.
+    f-strings and print() use __str__; repr() and the REPL use __repr__.
+  oop2: |
+    __eq__ defines the == operator between instances.
+    If you define __eq__, also define __hash__ — otherwise your class
+    becomes unhashable (can't be used in sets or as dict keys).
+    Tip: return hash((self.r, self.g, self.b)) for a tuple-based hash.
+  oop3: |
+    Use super().__init__(...) inside a child class to call the parent's __init__.
+    This ensures the parent is properly initialised before you add child-specific state.
+    super() also works for regular method calls, not just __init__.
+  oop4: |
+    @classmethod receives the class (cls) as first argument, not an instance.
+    Use it for alternative constructors: Temperature.from_fahrenheit(212).
+    @staticmethod receives no implicit first argument — it's a plain function
+    namespaced inside the class.
+  oop5: |
+    __slots__ = ('x', 'y') tells Python to allocate only those two attributes.
+    Benefits: less memory per instance, faster attribute access, prevents typo-attributes.
+    Trade-off: you can no longer add arbitrary attributes dynamically.

@@ -1,0 +1,21 @@
+en:
+  functions1: |
+    Default argument values let callers omit parameters they don't need to override.
+    Syntax: def func(param, optional="default").
+    The default is used when the caller doesn't provide that argument.
+  functions2: |
+    *args collects extra positional arguments into a tuple.
+    **kwargs collects extra keyword arguments into a dict.
+    Use them when you don't know how many arguments a caller will pass.
+  functions3: |
+    A closure is an inner function that "closes over" variables from its enclosing scope.
+    The inner function can read (and with nonlocal, modify) those variables even after
+    the outer function has returned.
+  functions4: |
+    lambda creates a small anonymous function: lambda x: x * 2
+    Use lambdas for short one-expression callbacks (e.g. sort keys).
+    For anything longer or reusable, prefer a named def.
+  functions5: |
+    Parameters before / in a function signature are positional-only.
+    They cannot be passed by keyword: func(a=1) raises TypeError.
+    This is useful for built-in-like APIs where keyword names are implementation details.

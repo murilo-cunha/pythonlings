@@ -4,3 +4,15 @@ en:
     Once created, we can add, remove or change their values through indices.
 
     Make the test pass keeping the list with the same requisites from the test cases.
+  data_structures2: |
+    Python dicts let you store and look up values by key.
+    Use dict[key] = value to add or update, del dict[key] to remove,
+    and dict.get(key, default) to safely retrieve missing keys.
+  data_structures3: |
+    Sets are unordered collections of unique values.
+    Use | for union (all elements), & for intersection (common elements),
+    and - for difference (in first but not second).
+  data_structures4: |
+    Python's starred unpacking lets you capture "the rest" of an iterable.
+    Write: first, *rest = my_list
+    You can also use it in the middle: a, *mid, z = my_list
