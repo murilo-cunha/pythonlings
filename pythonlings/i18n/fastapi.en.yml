@@ -1,0 +1,21 @@
+en:
+  fastapi1: |
+    FastAPI uses Python type annotations to define path parameters.
+    @app.get("/items/{item_id}") with def get_item(item_id: int) — FastAPI
+    parses and validates the path segment automatically.
+  fastapi2: |
+    Declare a Pydantic model as a function parameter to accept a JSON request body.
+    FastAPI validates the incoming JSON and raises 422 if it doesn't match the schema.
+    Use status_code=201 on the decorator to change the default 200 response code.
+  fastapi3: |
+    Query parameters are function parameters not declared in the path.
+    def list_items(category: str = None) -> GET /items/?category=fruit
+    Optional query params use = None as default; required params have no default.
+  fastapi4: |
+    Dependencies are declared with Depends(callable) in function signatures.
+    FastAPI calls the dependency function and injects its return value.
+    Use dependencies for shared resources: database connections, auth, config.
+  fastapi5: |
+    FastAPI supports async endpoints natively with async def.
+    TestClient (backed by httpx) handles async routes in tests transparently.
+    Use async def for I/O-bound work (DB queries, HTTP calls); sync def is fine for CPU work.

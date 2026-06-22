@@ -1,0 +1,23 @@
+en:
+  pydantic1: |
+    BaseModel defines a schema using class-level annotations.
+    Pydantic coerces compatible types automatically (e.g. "25" -> int 25).
+    Invalid data raises pydantic.ValidationError with detailed field-level messages.
+  pydantic2: |
+    Field() adds constraints to a model field.
+    Common validators: min_length, max_length (str), gt, ge, lt, le (numbers), default.
+    from pydantic import Field; price: float = Field(gt=0)
+  pydantic3: |
+    @field_validator("field_name") defines a custom validator for a specific field.
+    The method must be a @classmethod; return the validated value or raise ValueError.
+    Validators run after type coercion, so v is already the correct Python type.
+  pydantic4: |
+    Nested models are declared by using another BaseModel as a field type.
+    Pydantic accepts a plain dict where a nested model is expected and coerces it.
+    This makes it easy to validate deeply nested JSON structures.
+  pydantic5: |
+    Pydantic v2 renamed several methods from v1:
+    .dict() -> .model_dump() (returns a plain dict)
+    .json() -> .model_dump_json() (returns a JSON string)
+    Model.parse_obj(d) -> Model.model_validate(d) (validates from a dict)
+    Always use the v2 names in new code.

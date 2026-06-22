@@ -1,0 +1,21 @@
+en:
+  pytest1: |
+    pytest collects functions starting with test_ and runs them.
+    Use plain assert statements — pytest rewrites them to show helpful failure messages.
+    If an assertion fails, pytest prints the actual vs expected values.
+  pytest2: |
+    Fixtures are functions decorated with @pytest.fixture that provide test data.
+    Tests declare them as parameters — pytest injects the return value automatically.
+    Fixtures can set up and tear down shared state across multiple tests.
+  pytest3: |
+    @pytest.mark.parametrize("params", [...]) runs the same test with multiple inputs.
+    Each tuple in the list becomes one test case.
+    Great for table-driven tests: one definition, many input/output pairs.
+  pytest4: |
+    monkeypatch is a built-in fixture for temporarily modifying the environment.
+    monkeypatch.setenv("KEY", "val") sets an env variable for the test.
+    monkeypatch.setattr(obj, "attr", value) replaces attributes; all changes are undone after the test.
+  pytest5: |
+    pytest.raises(ExceptionType) is a context manager that asserts an exception is raised.
+    with pytest.raises(ValueError) as exc_info: ...
+    Use exc_info.match("pattern") or add match= to the call to check the message.
