@@ -6,7 +6,7 @@ authors = [
     { name = "Ronald-TR", email = "ronald-farias@outlook.com" },
     { name = "Murilo", email = "murilo@dataroots.io" },
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "watchdog>=3.0",
     "click>=8.0.4",
