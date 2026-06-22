@@ -1,0 +1,22 @@
+en:
+  functional1: |
+    map(func, iterable) applies func to every item and returns an iterator.
+    filter(pred, iterable) keeps items where pred returns True.
+    Both return lazy iterators — wrap with list() to materialise the results.
+  functional2: |
+    reduce(func, iterable) accumulates items left-to-right.
+    reduce(lambda a, b: a * b, [1,2,3,4]) = ((1*2)*3)*4 = 24
+    For simple reductions, prefer sum(), max(), or min() when available.
+  functional3: |
+    @lru_cache() memoises a function — it caches results keyed by arguments.
+    Repeated calls with the same args return the cached result instantly.
+    Transforms exponential recursion into linear for problems like Fibonacci.
+  functional4: |
+    partial(func, *args, **kwargs) returns a new callable with some args pre-filled.
+    square = partial(power, exponent=2) — then square(4) == 16.
+    Useful for adapting functions to the expected signature of callbacks or APIs.
+  functional5: |
+    itertools is a stdlib toolbox for efficient looping.
+    chain(*iterables) concatenates iterables lazily.
+    groupby(iterable, key) groups consecutive equal (or key-equal) elements.
+    islice(iterable, n) takes the first n elements from any iterator.

@@ -1,0 +1,22 @@
+en:
+  modern_python1: |
+    f-strings support format specs after a colon: f"{value:.2f}" for 2 decimal places,
+    f"{name:>10}" for right-align in 10 chars, f"{name:-<10}" to fill with dashes.
+    You can use any expression inside {}: f"{len(items)} items", f"{2**10}".
+  modern_python2: |
+    The walrus operator (:=) assigns AND returns a value in one expression.
+    while (line := f.readline()): process(line)
+    It eliminates the "assign then check" pattern in loops and comprehensions.
+  modern_python3: |
+    match/case is Python's structural pattern matching (3.10+).
+    match value: case 200: ... case 404: ... case _: (wildcard/default)
+    Unlike if/elif, it supports destructuring, guards, and class patterns.
+  modern_python4: |
+    match guards add an extra condition to a case with `if`:
+    case n if n < 0: return "negative"
+    The guard is checked after the pattern matches; if False, the next case is tried.
+  modern_python5: |
+    Class patterns match dataclass instances by field name:
+    case Circle(center=Point(x=cx, y=cy), radius=r):
+    Fields are matched structurally — you don't need to match all fields.
+    The matched variables (cx, cy, r) are bound in the case body.
