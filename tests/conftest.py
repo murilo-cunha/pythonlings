@@ -1,7 +1,7 @@
-import pytest
-
 import os
+
 import i18n
+import pytest
 
 
 @pytest.fixture

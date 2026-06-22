@@ -18,15 +18,14 @@ Example:
 
 ## Install dependencies
 
-    poetry install
+    uv sync
 
 
 ## Usage
 
-    poetry shell
-    python -m pythonlings start
+    uv run python -m pythonlings start
 
 
 ## Tests
 
-    poetry run pytest
+    uv run pytest

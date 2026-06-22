@@ -1,13 +1,15 @@
+import argparse
 import os
 import time
-from functools import partial, lru_cache
-import argparse
+from functools import lru_cache, partial
 
-from watchdog.observers import Observer
+import i18n
 from watchdog.events import PatternMatchingEventHandler
+from watchdog.observers import Observer
+
 from pythonlings.domain.exercises import Exercise
 from pythonlings.services.logging import logger
-import i18n
+
 _ = i18n.t
 
 

@@ -1,8 +1,9 @@
-from colorama import Fore
-import subprocess as subp
-import i18n
 import os
+import subprocess as subp
 from abc import ABC, abstractmethod
+
+import i18n
+from colorama import Fore
 
 _ = i18n.t
 

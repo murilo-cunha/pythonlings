@@ -1,9 +1,11 @@
-from pythonlings import __version__
-from pythonlings.services.exercises import get_exercises_root
-from pythonlings.domain.exercises import Exercise
-from uuid import uuid4
 import os
+from uuid import uuid4
+
 import pytest
+
+from pythonlings import __version__
+from pythonlings.domain.exercises import Exercise
+from pythonlings.services.exercises import get_exercises_root
 
 
 def test_version():

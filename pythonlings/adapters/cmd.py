@@ -1,7 +1,8 @@
+import argparse
 import os
 import sys
+
 import i18n
-import argparse
 
 from pythonlings.services.exercises import process_exercises, process_single_exercise
 
