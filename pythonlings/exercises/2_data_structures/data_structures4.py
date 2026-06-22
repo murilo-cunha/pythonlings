@@ -3,13 +3,15 @@
 numbers = [1, 2, 3, 4, 5]
 
 # Unpack: first element into `first`, rest into `rest`
-first = numbers[0]   # Fix: use unpacking assignment instead
-rest = numbers[1:]   # Fix: use unpacking assignment instead
+# Fix: use a single starred unpacking assignment: first, *rest = numbers
+first = None   # Fix: use unpacking assignment instead
+rest = None    # Fix: use unpacking assignment instead
 
 # Unpack: first, last, and everything in between
-first2 = numbers[0]    # Fix: use unpacking assignment
-middle = numbers[1:4]  # Fix: use unpacking assignment
-last = numbers[-1]     # Fix: use unpacking assignment
+# Fix: use a single starred unpacking assignment: first2, *middle, last = numbers
+first2 = None    # Fix: use unpacking assignment
+middle = None    # Fix: use unpacking assignment
+last = None      # Fix: use unpacking assignment
 
 # DON'T EDIT THE TESTS
 assert first == 1
