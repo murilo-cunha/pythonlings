@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import threading
 
 import i18n
@@ -9,6 +10,12 @@ from watchdog.observers import Observer
 
 from pythonlings.display import build_layout, console
 from pythonlings.domain.exercises import Exercise
+
+try:
+    import select, tty, termios
+    _TTY_AVAILABLE = True
+except ImportError:
+    _TTY_AVAILABLE = False
 
 _ = i18n.t
 
@@ -34,8 +41,44 @@ def walk_exercises():
     return fps
 
 
+def _start_keyboard_listener(hint_event: threading.Event, stop_event: threading.Event):
+    if not _TTY_AVAILABLE:
+        return None
+    def _listen():
+        fd = sys.stdin.fileno()
+        try:
+            old = termios.tcgetattr(fd)
+        except termios.error:
+            return
+        try:
+            tty.setcbreak(fd)
+            while not stop_event.is_set():
+                r, _, _ = select.select([sys.stdin], [], [], 0.1)
+                if r:
+                    ch = sys.stdin.read(1)
+                    if ch.lower() == 'h':
+                        hint_event.set()
+        except Exception:
+            pass
+        finally:
+            try:
+                termios.tcsetattr(fd, termios.TCSADRAIN, old)
+            except Exception:
+                pass
+    t = threading.Thread(target=_listen, daemon=True)
+    t.start()
+    return t
+
+
+def _get_hint_text(exercise) -> str:
+    return i18n.t(f'{exercise.package}.{exercise.name}')
+
+
 def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, total: int) -> None:
     modified_event = threading.Event()
+    hint_event = threading.Event()
+    stop_event = threading.Event()
+    hint_text = None
 
     def _fire(event):
         modified_event.set()
@@ -47,17 +90,21 @@ def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, to
     observer = Observer()
     observer.schedule(handler, os.path.dirname(exercise.fp), recursive=False)
     observer.start()
+    _start_keyboard_listener(hint_event, stop_event)
     try:
         while True:
-            live.update(build_layout(exercise, current, total, watching=True))
+            if hint_event.is_set() and hint_text is None:
+                hint_text = _get_hint_text(exercise)
+            live.update(build_layout(exercise, current, total, watching=True, hint_text=hint_text))
             if modified_event.wait(timeout=0.5):
                 modified_event.clear()
                 exercise.is_not_done()
                 exercise.process()
-                live.update(build_layout(exercise, current, total, watching=False))
+                live.update(build_layout(exercise, current, total, watching=False, hint_text=hint_text))
                 if not exercise.error and not exercise.to_do:
                     break
     finally:
+        stop_event.set()
         observer.stop()
         observer.join()
 

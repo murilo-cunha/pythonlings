@@ -8,14 +8,17 @@ from rich.text import Text
 console = Console()
 
 
-def build_layout(exercise, current: int, total: int, watching: bool) -> Layout:
+def build_layout(exercise, current: int, total: int, watching: bool, hint_text=None) -> Layout:
     layout = Layout()
-    layout.split_column(
+    sections = [
         Layout(name="header", size=3),
         Layout(name="code"),
-        Layout(name="status"),
-        Layout(name="footer", size=3),
-    )
+        Layout(name="status", size=12),
+    ]
+    if hint_text:
+        sections.append(Layout(name="hint", size=8))
+    sections.append(Layout(name="footer", size=3))
+    layout.split_column(*sections)
 
     # Header: exercise counter + progress bar
     progress = Progress(
@@ -56,15 +59,19 @@ def build_layout(exercise, current: int, total: int, watching: bool) -> Layout:
 
     layout["status"].update(Panel(status_body, title="Status", border_style=status_color, height=12))
 
+    if hint_text:
+        from rich.markdown import Markdown
+        layout["hint"].update(Panel(Markdown(hint_text), title="Hint", border_style="yellow"))
+
     # Footer: keyboard hints + optional spinner
     if watching:
         layout["footer"].update(Panel(Text.from_markup(
-            "[dim]Ctrl+C to quit  │  [bold]pythonlings hint[/bold] for a hint\n"
+            "[dim]Ctrl+C to quit  │  [bold]h[/bold] for hint\n"
             "⠸ Watching for changes…[/dim]"
         ), border_style="bright_black"))
     else:
         layout["footer"].update(Panel(Text.from_markup(
-            "[dim]Ctrl+C to quit  │  [bold]pythonlings hint[/bold] for a hint[/dim]"
+            "[dim]Ctrl+C to quit  │  [bold]h[/bold] for hint[/dim]"
         ), border_style="bright_black"))
 
     return layout
