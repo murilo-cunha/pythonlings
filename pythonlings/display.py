@@ -20,6 +20,7 @@ def build_layout(
     watching: bool,
     hint_text=None,
     height=None,
+    exercise_label=None,
 ) -> Layout:
     if height is None:
         height = console.size.height
@@ -44,7 +45,10 @@ def build_layout(
         console=console,
         expand=True,
     )
-    progress.add_task(f"Exercise {current}/{total}", total=total, completed=current)
+    desc = f"Exercise {current}/{total}"
+    if exercise_label:
+        desc += f" - {exercise_label}"
+    progress.add_task(desc, total=total, completed=current)
     if compact:
         layout["header"].update(progress)
     else:

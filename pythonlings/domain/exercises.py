@@ -9,6 +9,10 @@ import i18n
 _ = i18n.t
 
 
+def exercise_tests_root() -> str:
+    return os.path.join(os.getcwd(), "tests", "test_exercises")
+
+
 class ExerciseKind(Enum):
     NORMAL = auto()
     PYTEST_MODULE = auto()
@@ -38,7 +42,10 @@ class Exercise:
         self.to_do = None
         self.is_not_done()
         self.package, self.name = self.exercise_metadata()
-        self.test_fp = os.path.join(os.path.dirname(self.fp), "tests", "test_" + os.path.basename(self.fp))
+        group = os.path.basename(os.path.dirname(self.fp))  # e.g. "01_variables"
+        self.test_fp = os.path.join(exercise_tests_root(),
+                                    "test_" + group,
+                                    "test_" + os.path.basename(self.fp))
         self.kind = ExerciseKind.PYTEST_MODULE if self.package == "pytest" else ExerciseKind.NORMAL
 
     def exercise_metadata(self):
@@ -51,7 +58,7 @@ class Exercise:
 
     def is_not_done(self) -> bool:
         with open(self.fp, "r") as fp:
-            self.to_do = "# I AM NOT DONE" in fp.read()
+            self.to_do = any(line.strip() == "# I AM NOT DONE" for line in fp)
         return self.to_do
 
     def process(self) -> None:
@@ -61,9 +68,8 @@ class Exercise:
         if self.kind == ExerciseKind.PYTEST_MODULE:
             cmd = [sys.executable, "-m", "pytest", self.fp, "-v", "--tb=short", "--no-header"]
         elif os.path.exists(self.test_fp):
-            test_path = os.path.join("tests", "test_" + os.path.basename(self.fp))
-            cmd = [sys.executable, "-m", "pytest", test_path,
-                   "--rootdir", exercise_dir,
+            cmd = [sys.executable, "-m", "pytest", self.test_fp,
+                   "--noconftest", "-p", "no:cacheprovider",
                    "-v", "--tb=short", "--no-header"]
         else:
             cmd = [sys.executable, self.fp]

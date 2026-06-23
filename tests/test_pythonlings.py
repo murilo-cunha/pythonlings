@@ -6,7 +6,7 @@ import pytest
 from pythonlings import __version__
 from pythonlings.display import build_layout
 from pythonlings.domain.exercises import Exercise
-from pythonlings.services.exercises import get_exercises_root
+from pythonlings.services.exercises import _first_failing, get_exercises_root
 
 
 def _sample_exercise(fixtures_dir):
@@ -58,7 +58,11 @@ def test_exercise_fail(fixtures_dir):
     assert bool(exercise) is False
 
 
-def test_exercise_with_companion_test(fixtures_dir):
+def test_exercise_with_companion_test(fixtures_dir, monkeypatch):
+    monkeypatch.setattr(
+        "pythonlings.domain.exercises.exercise_tests_root",
+        lambda: os.path.join(fixtures_dir, "test_exercises"),
+    )
     epath = os.path.join(fixtures_dir, "1_examples", "exercise_with_test.py")
     exercise = Exercise(epath)
     exercise.process()
@@ -68,13 +72,45 @@ def test_exercise_with_companion_test(fixtures_dir):
     assert bool(exercise) is True
 
 
-def test_exercise_companion_test_fails(fixtures_dir):
+def test_exercise_companion_test_fails(fixtures_dir, monkeypatch):
+    monkeypatch.setattr(
+        "pythonlings.domain.exercises.exercise_tests_root",
+        lambda: os.path.join(fixtures_dir, "test_exercises"),
+    )
     epath = os.path.join(fixtures_dir, "1_examples", "exercise_with_failing_test.py")
     exercise = Exercise(epath)
     exercise.process()
 
     assert exercise.error is True
     assert bool(exercise) is False
+
+
+def test_marker_in_docstring_is_done(fixtures_dir):
+    # The marker phrase appears only inside a docstring, not as a standalone
+    # line, so the exercise must be considered done.
+    epath = os.path.join(fixtures_dir, "1_examples", "exercise_marker_in_docstring.py")
+    assert Exercise(epath).to_do is False
+    # A genuine standalone marker is still detected.
+    to_do_path = os.path.join(fixtures_dir, "1_examples", "exercise_sample_to_do.py")
+    assert Exercise(to_do_path).to_do is True
+
+
+def test_first_failing_returns_first_failure(fixtures_dir):
+    succ = os.path.join(fixtures_dir, "1_examples", "exercise_sample_success.py")
+    fail = os.path.join(fixtures_dir, "1_examples", "exercise_sample_fail.py")
+    idx, ex = _first_failing([succ, fail, succ], {})
+
+    assert idx == 2
+    assert ex is not None
+    assert ex.error is True
+
+
+def test_first_failing_all_pass(fixtures_dir):
+    succ = os.path.join(fixtures_dir, "1_examples", "exercise_sample_success.py")
+    idx, ex = _first_failing([succ, succ], {})
+
+    assert idx is None
+    assert ex is None
 
 
 def test_build_layout_compact_drops_code(fixtures_dir):
