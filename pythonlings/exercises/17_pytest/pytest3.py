@@ -1,23 +1,23 @@
+"""
+@pytest.mark.parametrize("names", [...]) runs the same test function with multiple inputs.
+Each tuple becomes one test case with its own pass/fail result.
+
+Fix celsius_to_fahrenheit and the expected values in the parametrize decorator.
+"""
+
 # I AM NOT DONE
 
 import pytest
 
 
 def celsius_to_fahrenheit(c):
-    return c * 9 / 5  # Fix: missing + 32
+    return c * 9 / 5
 
 
-# Fix the parametrize decorator — it currently has wrong expected values
 @pytest.mark.parametrize("celsius,expected", [
-    (0, 31),    # Fix: 0°C should be 32°F
-    (100, 211), # Fix: 100°C should be 212°F
-    (-40, -40), # -40°C = -40°F (this expected value is correct)
+    (0, 31),
+    (100, 211),
+    (-40, -40),
 ])
 def test_conversion(celsius, expected):
     assert celsius_to_fahrenheit(celsius) == expected
-
-
-# DON'T EDIT BELOW
-import sys
-if __name__ == "__main__":
-    sys.exit(pytest.main([__file__, "-v"]))

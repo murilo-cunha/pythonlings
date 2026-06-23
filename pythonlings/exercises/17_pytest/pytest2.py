@@ -1,3 +1,11 @@
+"""
+Fixtures are functions decorated with @pytest.fixture that provide reusable test data.
+Tests declare them as parameters — pytest injects the return value automatically.
+Use fixtures to avoid repeating setup code across test functions.
+
+Fix the sample_data fixture so all three tests pass.
+"""
+
 # I AM NOT DONE
 
 import pytest
@@ -5,8 +13,7 @@ import pytest
 
 @pytest.fixture
 def sample_data():
-    # Fix: return a dict with keys "name" (str), "scores" (list of ints), "active" (bool)
-    return {}  # Fix this
+    return {}
 
 
 def test_name(sample_data):
@@ -20,9 +27,3 @@ def test_scores(sample_data):
 
 def test_active(sample_data):
     assert sample_data["active"] is True
-
-
-# DON'T EDIT BELOW
-import sys
-if __name__ == "__main__":
-    sys.exit(pytest.main([__file__, "-v"]))
