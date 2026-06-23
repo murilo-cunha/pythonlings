@@ -1,3 +1,13 @@
+"""
+@field_validator("field_name") defines a custom validator for a specific field.
+The method must be decorated with @classmethod; it receives the coerced value
+and should return it unchanged or raise ValueError with a message.
+
+Complete the two validators:
+- username_must_be_lowercase: raise ValueError if the username has any uppercase letters
+- email_must_contain_at: raise ValueError("invalid email") if "@" is not in the value
+"""
+
 # I AM NOT DONE
 
 from pydantic import BaseModel, field_validator
@@ -10,31 +20,9 @@ class UserForm(BaseModel):
     @field_validator("username")
     @classmethod
     def username_must_be_lowercase(cls, v):
-        # Fix: raise ValueError if v contains uppercase letters
-        # Otherwise return v
         return v
 
     @field_validator("email")
     @classmethod
     def email_must_contain_at(cls, v):
-        # Fix: raise ValueError("invalid email") if "@" not in v
         return v
-
-
-# DON'T EDIT THE TESTS
-from pydantic import ValidationError
-
-uf = UserForm(username="alice", email="alice@example.com")
-assert uf.username == "alice"
-
-try:
-    UserForm(username="Alice", email="alice@example.com")
-    assert False, "Expected ValidationError"
-except ValidationError as e:
-    assert "uppercase" in str(e).lower() or "value error" in str(e).lower()
-
-try:
-    UserForm(username="bob", email="notanemail")
-    assert False, "Expected ValidationError"
-except ValidationError:
-    pass

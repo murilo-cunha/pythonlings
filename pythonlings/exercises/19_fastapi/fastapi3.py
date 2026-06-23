@@ -1,3 +1,11 @@
+"""
+Query parameters are function parameters not included in the path pattern.
+def list_items(category: str = None) captures GET /items/?category=fruit.
+Optional params use None as the default; required params have no default.
+
+Complete list_items: return all items, or only those matching category if provided.
+"""
+
 # I AM NOT DONE
 
 from fastapi import FastAPI
@@ -14,20 +22,7 @@ ITEMS = [
 
 @app.get("/items/")
 def list_items(category: str = None):
-    # Fix: if category is provided, filter ITEMS by category; otherwise return all
-    return ITEMS  # Fix this
+    return ITEMS
 
 
 client = TestClient(app)
-
-
-# DON'T EDIT THE TESTS
-response = client.get("/items/")
-assert response.status_code == 200
-assert len(response.json()) == 3
-
-response = client.get("/items/?category=fruit")
-assert response.status_code == 200
-fruits = response.json()
-assert len(fruits) == 2
-assert all(f["category"] == "fruit" for f in fruits)

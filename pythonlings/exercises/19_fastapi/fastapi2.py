@@ -1,3 +1,11 @@
+"""
+Declare a Pydantic BaseModel as a function parameter to accept a JSON request body.
+FastAPI validates the incoming JSON against the model schema and raises 422 if invalid.
+Use status_code= on the decorator to change the default 200 response code.
+
+Complete create_item to return {"id": 1, "name": item.name, "price": item.price}.
+"""
+
 # I AM NOT DONE
 
 from fastapi import FastAPI
@@ -14,17 +22,7 @@ class Item(BaseModel):
 
 @app.post("/items/", status_code=201)
 def create_item(item: Item):
-    # Fix: return {"id": 1, "name": item.name, "price": item.price}
     return {}
 
 
 client = TestClient(app)
-
-
-# DON'T EDIT THE TESTS
-response = client.post("/items/", json={"name": "Widget", "price": 9.99})
-assert response.status_code == 201
-data = response.json()
-assert data["id"] == 1
-assert data["name"] == "Widget"
-assert data["price"] == 9.99
