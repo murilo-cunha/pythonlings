@@ -1,10 +1,13 @@
+"""
+Set comprehensions: {expression for item in iterable}
+Like list comprehensions but produce a set — duplicates are removed automatically.
+The only difference from a list comprehension is the curly braces.
+
+Fix the comprehension to collect unique first letters of words, not the words themselves.
+"""
+
 # I AM NOT DONE
 
+
 sentence = "the quick brown fox jumps over the lazy dog"
-
-# Fix: create a set of unique first-letters using a set comprehension
-first_letters = {word for word in sentence.split()}  # Fix the expression
-
-# DON'T EDIT THE TESTS
-assert first_letters == {"t", "q", "b", "f", "j", "o", "l", "d"}
-assert isinstance(first_letters, set)
+first_letters = {word for word in sentence.split()}

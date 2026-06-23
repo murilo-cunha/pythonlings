@@ -1,21 +1,16 @@
 en:
   comprehensions1: |
-    List comprehensions: [expression for item in iterable if condition]
-    They're more concise and often faster than equivalent for-loops.
-    Read them left to right: "give me n**2 for each n in numbers where n is even".
+    [n**2 for n in numbers if n % 2 == 0]
+    The condition filters first (n % 2 == 0), then the expression squares (n**2).
   comprehensions2: |
-    Dict comprehensions: {key_expr: value_expr for item in iterable}
-    Use them to build dicts from sequences without a loop + .update().
+    {w: len(w) for w in words}
+    Replace the value expression (currently 0) with len(w).
   comprehensions3: |
-    Set comprehensions: {expression for item in iterable}
-    Like list comprehensions but produce a set (deduplication is automatic).
-    The only difference from a list comprehension is the curly braces.
+    {word[0] for word in sentence.split()}
+    Replace the expression (currently the whole word) with word[0].
   comprehensions4: |
-    Generator expressions look like list comprehensions but use () instead of [].
-    They don't build the whole list in memory — they produce values lazily on demand.
-    Use them when you only need to iterate once or when the sequence is large.
+    Change [n ** 3 for n in numbers] to (n ** 3 for n in numbers).
+    Round brackets () create a generator; square brackets [] create a list.
   comprehensions5: |
-    Nested comprehensions: [expr for outer in iterable for inner in outer]
-    Read left to right — each "for" clause is a nested loop.
-    They're powerful for flattening and transposing, but avoid deeply nesting
-    more than 2 levels as readability drops quickly.
+    [matrix[i][j] for i in range(3) for j in range(3)]
+    Add the inner loop: for j in range(3). Then use matrix[i][j] as the expression.

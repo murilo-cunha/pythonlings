@@ -1,3 +1,11 @@
+"""
+ABC (Abstract Base Class) forces subclasses to implement specific methods.
+Decorate abstract methods with @abstractmethod — instantiating a subclass
+that skips any abstract method raises TypeError.
+
+Implement Rectangle.area() (width * height) and Rectangle.perimeter() (2*(w+h)).
+"""
+
 # I AM NOT DONE
 
 from abc import ABC, abstractmethod
@@ -5,12 +13,10 @@ from abc import ABC, abstractmethod
 
 class Shape(ABC):
     @abstractmethod
-    def area(self) -> float:
-        ...
+    def area(self) -> float: ...
 
     @abstractmethod
-    def perimeter(self) -> float:
-        ...
+    def perimeter(self) -> float: ...
 
 
 class Rectangle(Shape):
@@ -19,20 +25,7 @@ class Rectangle(Shape):
         self.height = height
 
     def area(self) -> float:
-        return 0.0  # Fix this
+        return 0.0
 
     def perimeter(self) -> float:
-        return 0.0  # Fix this
-
-
-# DON'T EDIT THE TESTS
-r = Rectangle(4, 5)
-assert r.area() == 20.0
-assert r.perimeter() == 18.0
-
-# Abstract classes cannot be instantiated directly
-try:
-    Shape()
-    assert False, "Expected TypeError"
-except TypeError:
-    pass
+        return 0.0

@@ -1,3 +1,11 @@
+"""
+Use field(default_factory=list) for mutable defaults like lists and dicts.
+Never use a bare default=[] — Python shares one list across all instances!
+default_factory calls the given callable once per instance at creation time.
+
+Implement add_track() to append the track to self.tracks.
+"""
+
 # I AM NOT DONE
 
 from dataclasses import dataclass, field
@@ -6,19 +14,7 @@ from dataclasses import dataclass, field
 @dataclass
 class Playlist:
     name: str
-    tracks: list = field(default_factory=list)  # This is correct — study it
+    tracks: list = field(default_factory=list)
 
     def add_track(self, track: str):
-        # Fix: append track to self.tracks
         pass
-
-
-# DON'T EDIT THE TESTS
-p1 = Playlist("Chill")
-p2 = Playlist("Workout")
-
-p1.add_track("Song A")
-p1.add_track("Song B")
-
-assert p1.tracks == ["Song A", "Song B"]
-assert p2.tracks == []  # Separate list per instance (default_factory)

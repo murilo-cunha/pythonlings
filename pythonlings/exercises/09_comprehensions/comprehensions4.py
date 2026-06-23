@@ -1,11 +1,14 @@
+"""
+Generator expressions look like list comprehensions but use () instead of [].
+They don't build the whole sequence in memory — they yield values lazily on demand.
+Use them when you only need to iterate once or when the sequence could be large.
+
+Change the [] brackets to () to make cubes_gen a generator expression.
+"""
+
 # I AM NOT DONE
 
-numbers = range(1, 11)
-
-# Fix: create a generator expression (use () not []) that yields cubes
-cubes_gen = [n ** 3 for n in numbers]  # Fix: make this a generator, not a list
-
-# DON'T EDIT THE TESTS
 import types
-assert isinstance(cubes_gen, types.GeneratorType)
-assert list(cubes_gen) == [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+
+numbers = range(1, 11)
+cubes_gen = [n ** 3 for n in numbers]

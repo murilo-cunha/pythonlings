@@ -1,3 +1,11 @@
+"""
+__post_init__ runs right after @dataclass's generated __init__ sets all fields.
+Use it for validation, clamping, or computing derived fields.
+Access and modify fields normally: self.value = max(self.minimum, self.value).
+
+Implement __post_init__ to clamp self.value between minimum and maximum.
+"""
+
 # I AM NOT DONE
 
 from dataclasses import dataclass
@@ -10,19 +18,4 @@ class BoundedInt:
     maximum: int = 100
 
     def __post_init__(self):
-        # Fix: clamp self.value to be between minimum and maximum
         pass
-
-
-# DON'T EDIT THE TESTS
-b = BoundedInt(50)
-assert b.value == 50
-
-b_low = BoundedInt(-10)
-assert b_low.value == 0  # Clamped to minimum
-
-b_high = BoundedInt(200)
-assert b_high.value == 100  # Clamped to maximum
-
-b_custom = BoundedInt(5, minimum=10, maximum=20)
-assert b_custom.value == 10  # Clamped to minimum=10

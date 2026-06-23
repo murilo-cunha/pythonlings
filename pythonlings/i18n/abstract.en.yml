@@ -1,18 +1,14 @@
 en:
   abstract_classes1: |
-    ABC (Abstract Base Class) forces subclasses to implement specific methods.
-    Decorate methods with @abstractmethod — subclasses that skip them raise TypeError.
-    ABCs provide nominal subtyping: you must explicitly inherit from the ABC.
+    Rectangle.area: return self.width * self.height
+    Rectangle.perimeter: return 2 * (self.width + self.height)
   abstract_classes2: |
-    To create an abstract property, stack @property and @abstractmethod.
-    Order matters: @property must come first (outermost), @abstractmethod second.
-    Subclasses must define the property with @property, not just a plain attribute.
+    Cat.sound property: return "meow"
+    Dog.sound property: return "woof"
+    The @property decorator must be present on the concrete implementation too.
   abstract_classes3: |
-    A Protocol defines an interface structurally — no explicit inheritance needed.
-    Any class that has the required methods automatically satisfies the Protocol.
-    This is called "duck typing" formalised: if it has .draw(), it's Drawable.
+    Square.draw: return f"Square(s={self.side})"
+    The Circle implementation is already correct — use it as a reference.
   abstract_classes4: |
-    ABCs use nominal subtyping (explicit inheritance required).
-    Protocols use structural subtyping (any matching shape qualifies).
-    Use ABCs when you own the hierarchy; use Protocols for third-party or loosely
-    coupled code where you can't (or don't want to) force inheritance.
+    CsvRow.serialize: return ",".join(str(v) for v in self.values)
+    CsvRow satisfies Serializable (Protocol) structurally — no inheritance needed.
