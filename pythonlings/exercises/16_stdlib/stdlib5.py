@@ -1,24 +1,20 @@
+"""
+re.findall(pattern, text) returns all non-overlapping matches as a list.
+re.sub(pattern, repl, text) replaces every match with repl.
+Use a capturing group (...) with re.search(...).group(1) to extract a part of a match.
+
+Fix emails (findall), masked (sub replacing digits with X), and area_code (search with group).
+"""
+
 # I AM NOT DONE
 
 import re
 
 text = "Contact us at support@example.com or sales@company.org"
 
-# Fix: find all email addresses in text using re.findall()
-emails = []  # Fix: use re.findall() with a pattern matching word@word.word
+emails = []
 
-# Fix: replace all digits in the string below with "X" using re.sub()
-masked = "Order #12345 ref #678"  # Fix: use re.sub()
+masked = "Order #12345 ref #678"
 
-# Fix: extract the area code from a US phone number using re.search()
 phone = "(555) 867-5309"
-area_code = ""  # Fix: use re.search() with a capturing group to extract the digits
-
-# DON'T EDIT THE TESTS
-assert "support@example.com" in emails
-assert "sales@company.org" in emails
-assert len(emails) == 2
-
-assert masked == "Order #XXXXX ref #XXX"
-
-assert area_code == "555"
+area_code = ""

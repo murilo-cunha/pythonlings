@@ -1,26 +1,25 @@
 en:
   stdlib1: |
-    pathlib.Path provides an OO interface to filesystem paths.
-    Use / to join paths: base / "sub" / "file.txt"
-    Key methods: .mkdir(), .read_text(), .write_text(), .exists(), .is_dir(), .suffix, .stem.
+    data_dir = (tmp_dir / "data")
+    data_dir.mkdir()
+    hello_file = data_dir / "hello.txt"
+    hello_file.write_text("Hello, pathlib!")
   stdlib2: |
-    Always use timezone-aware datetimes in production to avoid ambiguity.
-    datetime(2024, 1, 1, tzinfo=timezone.utc) creates a UTC datetime.
-    Arithmetic with timedelta: dt + timedelta(hours=2, minutes=30).
+    utc_noon = datetime(2024, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    later = utc_noon + timedelta(hours=2, minutes=30)
+    days_between = (end - start).days
   stdlib3: |
-    Counter(iterable) counts occurrences. .most_common(n) returns top-n pairs.
-    defaultdict(list) auto-creates a list for missing keys — no KeyError on first append.
-    deque(maxlen=n) is a fixed-size sliding window — oldest items are auto-discarded.
+    counts   = Counter(words)
+    by_letter = defaultdict(list); for word in words: by_letter[word[0]].append(word)
+    window   = deque(maxlen=3); for n in [1,2,3,4,5]: window.append(n)
   stdlib4: |
-    json.dumps(obj) → JSON string. json.loads(s) → Python object.
-    Add indent=2 for human-readable output.
-    Python True/False/None become JSON true/false/null automatically.
+    json_str  = json.dumps(data)
+    restored  = json.loads(json_str)
+    pretty    = json.dumps(data, indent=2)
   stdlib5: |
-    re.findall(pattern, text) returns all non-overlapping matches.
-    re.sub(pattern, repl, text) replaces matches with repl.
-    Use groups (...) with re.search(...).group(1) to extract parts of a match.
+    emails    = re.findall(r'[\w.]+@[\w.]+', text)
+    masked    = re.sub(r'\d', 'X', "Order #12345 ref #678")
+    area_code = re.search(r'\((\d+)\)', phone).group(1)
   stdlib6: |
-    logging.getLogger(name) returns (or creates) a named logger.
-    Set logger.setLevel(logging.DEBUG) to emit debug messages.
-    Attach handlers to control where output goes: StreamHandler, FileHandler, etc.
-    The root logger's level is WARNING by default — child loggers inherit it unless explicitly set.
+    Add: logger.setLevel(logging.DEBUG)
+    Place it after logger = logging.getLogger("myapp") and before addHandler.

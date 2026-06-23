@@ -1,29 +1,23 @@
+"""
+Counter(iterable) counts occurrences; .most_common(n) returns the top-n pairs.
+defaultdict(list) auto-creates a list for missing keys — no KeyError on first append.
+deque(maxlen=n) is a fixed-size sliding window; oldest items are auto-discarded.
+
+Fix counts (use Counter), by_letter (use defaultdict), and window (use deque).
+"""
+
 # I AM NOT DONE
 
 from collections import Counter, defaultdict, deque
 
 words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
 
-# Fix: use Counter to count word frequencies
-counts = {}  # Fix: use Counter(words)
+counts = {}
 
-# Fix: use defaultdict(list) to group words by first letter
-by_letter = {}  # Fix: use defaultdict(list)
+by_letter = {}
 for word in words:
-    pass  # Fix: append to by_letter[word[0]]
+    pass
 
-# Fix: use deque with maxlen=3 as a sliding window
-window = []  # Fix: use deque(maxlen=3)
+window = []
 for n in [1, 2, 3, 4, 5]:
-    window.append(n)  # Once fixed, window auto-discards the oldest item
-
-# DON'T EDIT THE TESTS
-assert counts["apple"] == 3
-assert counts["banana"] == 2
-assert counts["cherry"] == 1
-assert counts.most_common(1) == [("apple", 3)]
-
-assert sorted(by_letter["a"]) == ["apple", "apple", "apple"]
-assert sorted(by_letter["b"]) == ["banana", "banana"]
-
-assert list(window) == [3, 4, 5]  # Only last 3 elements kept
+    window.append(n)

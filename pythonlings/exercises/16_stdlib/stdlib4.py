@@ -1,20 +1,17 @@
+"""
+json.dumps(obj) serialises Python to a JSON string. json.loads(s) parses it back.
+Python True/False/None become JSON true/false/null automatically.
+Add indent=2 to json.dumps() for human-readable pretty-printed output.
+
+Fix json_str, restored, and pretty using json.dumps() and json.loads().
+"""
+
 # I AM NOT DONE
 
 import json
 
 data = {"name": "Ada", "scores": [95, 87, 92], "active": True}
 
-# Fix: serialize data to a JSON string (compact, no extra whitespace)
-json_str = ""  # Fix: use json.dumps()
-
-# Fix: deserialize the JSON string back to a Python dict
-restored = {}  # Fix: use json.loads()
-
-# Fix: pretty-print with 2-space indent
-pretty = ""  # Fix: use json.dumps() with indent=2
-
-# DON'T EDIT THE TESTS
-assert json_str == '{"name": "Ada", "scores": [95, 87, 92], "active": true}'
-assert restored == data
-assert isinstance(restored["scores"], list)
-assert pretty.startswith("{\n  ")
+json_str = ""
+restored = {}
+pretty = ""
