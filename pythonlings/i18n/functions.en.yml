@@ -1,21 +1,15 @@
 en:
   functions1: |
-    Default argument values let callers omit parameters they don't need to override.
-    Syntax: def func(param, optional="default").
-    The default is used when the caller doesn't provide that argument.
+    The function hard-codes "Hello" instead of using the greeting parameter.
+    Change the f-string to use greeting instead: f"{greeting}, {name}!"
   functions2: |
-    *args collects extra positional arguments into a tuple.
-    **kwargs collects extra keyword arguments into a dict.
-    Use them when you don't know how many arguments a caller will pass.
+    total: return sum(args). describe: return kwargs directly (it's already a dict).
   functions3: |
-    A closure is an inner function that "closes over" variables from its enclosing scope.
-    The inner function can read (and with nonlocal, modify) those variables even after
-    the outer function has returned.
+    Inside multiply, use factor (the captured variable): return x * factor
+    factor comes from the enclosing make_multiplier scope — Python keeps it alive.
   functions4: |
-    lambda creates a small anonymous function: lambda x: x * 2
-    Use lambdas for short one-expression callbacks (e.g. sort keys).
-    For anything longer or reusable, prefer a named def.
+    square: lambda x: x**2.  is_even: lambda x: x % 2 == 0.
+    second: lambda t: t[1]  (returns the second element of the tuple).
   functions5: |
-    Parameters before / in a function signature are positional-only.
-    They cannot be passed by keyword: func(a=1) raises TypeError.
-    This is useful for built-in-like APIs where keyword names are implementation details.
+    Use math.sqrt(a**2 + b**2) or math.hypot(a, b).
+    The / in the signature makes a and b positional-only — don't remove it.

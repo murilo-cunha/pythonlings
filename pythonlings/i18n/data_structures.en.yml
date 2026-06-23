@@ -1,18 +1,17 @@
 en:
   data_structures1: |
-    In Python, the lists are mutable data structures extremely flexible that we can use to store anything!
-    Once created, we can add, remove or change their values through indices.
-
-    Make the test pass keeping the list with the same requisites from the test cases.
+    Start with [0, "hello", True, ["other list"]]. You need to:
+    set index 0 to 1, change index 1 to "world", change index 2 to False,
+    and pop the last element. Use my_list[idx] = value, my_list.pop().
   data_structures2: |
-    Python dicts let you store and look up values by key.
-    Use dict[key] = value to add or update, del dict[key] to remove,
-    and dict.get(key, default) to safely retrieve missing keys.
+    prices["banana"] = 0.79 updates the price.
+    del prices["cherry"] removes the key.
+    prices.get("mango", 0.0) returns 0.0 when "mango" is absent.
   data_structures3: |
-    Sets are unordered collections of unique values.
-    Use | for union (all elements), & for intersection (common elements),
-    and - for difference (in first but not second).
+    evens_only = evens - primes  (difference)
+    both = evens & primes        (intersection)
+    all_nums = evens | primes    (union)
   data_structures4: |
-    Python's starred unpacking lets you capture "the rest" of an iterable.
-    Write: first, *rest = my_list
-    You can also use it in the middle: a, *mid, z = my_list
+    first, *rest = numbers assigns numbers[0] to first and numbers[1:] to rest.
+    first2, *middle, last = numbers captures head, middle slice, and tail.
+    Replace the None assignments with a single starred unpacking statement each.

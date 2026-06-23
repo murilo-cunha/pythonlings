@@ -1,25 +1,18 @@
 en:
   variables1: |
-    Python is a language that is object oriented, strong and dynamic typing
-    This means that the interpreter will dynamically set the variable type during attribuitions
-    But once typed, the variable will have a type, respecting the protocols and behaviors of their type.
+    Each type has a specific literal syntax: 1 (int), 1.0 (float), "text" (str),
+    b"data" (bytes), True/False (bool), (1, 2) (tuple).
+    Assign the correct literal to each variable — the types must match exactly.
   variables2: |
-    You have to fix this program by attribuiting the right types to the variables!
-    Remember that the types are attributed during the variable initialization.
-    If you change the value, you change te final variable type! 
+    To get an int write 1 (no dot). For float write 1.0 (with dot).
+    For bytes write b"Hello" (b prefix). Change the right-hand side of each assignment.
   variables3: |
-    In Python you can assign a single value to multiple variables at same time.
-    You still can assign multiple values to multiple variables, this techique is called unpacking.
+    x = y = z = value assigns value to all three in one statement.
+    a, b, c = "a", "b", "c" unpacks a tuple. Both are already correct here —
+    just remove the # I AM NOT DONE comment.
   variables4: |
-    Variables can be used to compound other variables trough operators and protocols (that we'll see later),
-    behind the scenes, operators in Python uses protocols implemented by types to solve the operations.
-    For now, we can assume that the types "int" and "str" implements the addition protocol, allowing us to sum values *at same type*, obtaining a new as result.
+    one + two fails because int + str is a TypeError.
+    Fix it by converting "2" to int first: int(two), or compute 1 + 2 directly.
   variables5: |
-    In Python, we have the concept of mutable and immutable types.
-    Immutable types are: int, str, boolean, float and tuples.
-    Mutable types are: list, dict and set.
-
-    To immutable variables, this means that once created, we cannot change their values in memory (by acessing index or calling methods).
-    But, mutable types allow us to change their values in memory.
-    Immutable types are "cheap" to acces and "expensive" to change, whereas mutable types tend to invert these characteristics.
-    Please keep this in mind, we will discuss it better in "Data Structures" module.
+    Strings are immutable — hello_immutable_string[0] = "H" raises TypeError.
+    Remove that line. The list assignment hello_mutable_list[0] = "I WORK" is fine.

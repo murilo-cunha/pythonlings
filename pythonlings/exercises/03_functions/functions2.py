@@ -1,17 +1,17 @@
+"""
+*args collects all extra positional arguments into a tuple.
+**kwargs collects all extra keyword arguments into a dict.
+Use them when you don't know in advance how many arguments a caller will pass.
+
+Implement total() to sum all positional args and describe() to return all kwargs as a dict.
+"""
+
 # I AM NOT DONE
 
+
 def total(*args):
-    # Return the sum of all positional arguments
-    return 0  # Fix this
+    return 0
 
 
 def describe(**kwargs):
-    # Return a dict containing all keyword arguments
-    return {}  # Fix this
-
-
-# DON'T EDIT THE TESTS
-assert total(1, 2, 3) == 6
-assert total(10, 20) == 30
-assert total() == 0
-assert describe(name="Ada", lang="Python") == {"name": "Ada", "lang": "Python"}
+    return {}

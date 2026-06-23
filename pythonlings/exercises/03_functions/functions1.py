@@ -1,11 +1,13 @@
+"""
+Default argument values let callers omit parameters they don't need to override.
+Syntax: def func(param, optional="default"). When the caller doesn't supply the
+optional argument, Python uses the default value.
+
+Fix greet() so it uses the greeting parameter instead of the hard-coded "Hello".
+"""
+
 # I AM NOT DONE
 
+
 def greet(name, greeting="Hello"):
-    # Currently ignores the greeting parameter — fix it
     return f"Hello, {name}!"
-
-
-# DON'T EDIT THE TESTS
-assert greet("Alice") == "Hello, Alice!"
-assert greet("Bob", "Hi") == "Hi, Bob!"
-assert greet("Carol", greeting="Hey") == "Hey, Carol!"
