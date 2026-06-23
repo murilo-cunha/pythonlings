@@ -27,9 +27,9 @@ def walk_exercises():
     root = get_exercises_root()
     fps = []
     for dirpath, dirnames, files in os.walk(root):
-        dirnames.sort()
+        dirnames[:] = sorted(d for d in dirnames if d != 'tests')
         for fname in sorted(files):
-            if fname.endswith(".py") and not fname.startswith("test_"):
+            if fname.endswith(".py"):
                 fps.append(os.path.join(dirpath, fname))
     return fps
 

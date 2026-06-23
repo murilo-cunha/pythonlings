@@ -38,7 +38,7 @@ class Exercise:
         self.to_do = None
         self.is_not_done()
         self.package, self.name = self.exercise_metadata()
-        self.test_fp = os.path.join(os.path.dirname(self.fp), "test_" + os.path.basename(self.fp))
+        self.test_fp = os.path.join(os.path.dirname(self.fp), "tests", "test_" + os.path.basename(self.fp))
         self.kind = ExerciseKind.PYTEST_MODULE if self.package == "pytest" else ExerciseKind.NORMAL
 
     def exercise_metadata(self):
@@ -57,12 +57,16 @@ class Exercise:
     def process(self) -> None:
         if self.is_not_done():
             return
+        exercise_dir = os.path.dirname(self.fp)
         if self.kind == ExerciseKind.PYTEST_MODULE:
             cmd = [sys.executable, "-m", "pytest", self.fp, "-v", "--tb=short", "--no-header"]
         elif os.path.exists(self.test_fp):
-            cmd = [sys.executable, "-m", "pytest", self.test_fp, "-v", "--tb=short", "--no-header"]
+            test_path = os.path.join("tests", "test_" + os.path.basename(self.fp))
+            cmd = [sys.executable, "-m", "pytest", test_path,
+                   "--rootdir", exercise_dir,
+                   "-v", "--tb=short", "--no-header"]
         else:
             cmd = [sys.executable, self.fp]
-        r = subp.run(cmd, stdout=subp.PIPE, stderr=subp.PIPE, cwd=os.path.dirname(self.fp))
+        r = subp.run(cmd, stdout=subp.PIPE, stderr=subp.PIPE, cwd=exercise_dir)
         self.error = bool(r.returncode)
         self.output = (r.stdout + r.stderr).decode(errors="replace")
