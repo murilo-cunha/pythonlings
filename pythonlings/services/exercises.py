@@ -37,11 +37,13 @@ def walk_exercises():
 def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, total: int) -> None:
     modified_event = threading.Event()
 
-    def on_modified(event):
+    def _fire(event):
         modified_event.set()
 
     handler = PatternMatchingEventHandler(patterns=["*.py"], ignore_directories=True)
-    handler.on_modified = on_modified
+    handler.on_modified = _fire
+    handler.on_created  = _fire
+    handler.on_moved    = _fire
     observer = Observer()
     observer.schedule(handler, os.path.dirname(exercise.fp), recursive=False)
     observer.start()
