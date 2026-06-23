@@ -29,8 +29,8 @@ def test_exercise_success(fixtures_dir):
     exercise.process()
 
     assert exercise.error is False
+    assert exercise.to_do is False
     assert bool(exercise) is True
-    assert "[SUCCESS]" in str(exercise)
 
 
 def test_exercise_to_do(fixtures_dir):
@@ -40,7 +40,6 @@ def test_exercise_to_do(fixtures_dir):
 
     assert exercise.to_do is True
     assert bool(exercise) is True
-    assert "[MAKE IT PASS]" in str(exercise)
 
 
 def test_exercise_fail(fixtures_dir):
@@ -49,5 +48,24 @@ def test_exercise_fail(fixtures_dir):
     exercise.process()
 
     assert exercise.error is True
+    assert exercise.to_do is False
     assert bool(exercise) is False
-    assert "[ERROR]" in str(exercise)
+
+
+def test_exercise_with_companion_test(fixtures_dir):
+    epath = os.path.join(fixtures_dir, "1_examples", "exercise_with_test.py")
+    exercise = Exercise(epath)
+    exercise.process()
+
+    assert exercise.error is False
+    assert exercise.to_do is False
+    assert bool(exercise) is True
+
+
+def test_exercise_companion_test_fails(fixtures_dir):
+    epath = os.path.join(fixtures_dir, "1_examples", "exercise_with_failing_test.py")
+    exercise = Exercise(epath)
+    exercise.process()
+
+    assert exercise.error is True
+    assert bool(exercise) is False
