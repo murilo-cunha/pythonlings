@@ -1,14 +1,13 @@
+"""
+match guards add an if condition to a case clause:
+    case n if n < 0: return "negative"
+The guard is checked after the pattern matches; if it fails, the next case is tried.
+
+Implement classify() using match/case with guards for negative, zero, small, and large.
+"""
+
 # I AM NOT DONE
 
 
 def classify(n):
-    # Fix: implement using match/case with guards (if conditions in case clauses)
-    # The current implementation always returns "unknown"
     return "unknown"
-
-
-# DON'T EDIT THE TESTS
-assert classify(-5) == "negative"
-assert classify(0) == "zero"
-assert classify(3) == "small positive"   # 1-9
-assert classify(10) == "large positive"  # 10+

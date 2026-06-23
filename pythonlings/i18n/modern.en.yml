@@ -1,22 +1,27 @@
 en:
   modern_python1: |
-    f-strings support format specs after a colon: f"{value:.2f}" for 2 decimal places,
-    f"{name:>10}" for right-align in 10 chars, f"{name:-<10}" to fill with dashes.
-    You can use any expression inside {}: f"{len(items)} items", f"{2**10}".
+    formatted: f"{value:.2f}"       (2 decimal places)
+    padded:    f"{name:->10}"       (right-align, fill with -)
+    count:     f"{len(items)} items"  (expression inside {})
   modern_python2: |
-    The walrus operator (:=) assigns AND returns a value in one expression.
-    while (line := f.readline()): process(line)
-    It eliminates the "assign then check" pattern in loops and comprehensions.
+    whole_roots = [root for n in numbers if (root := math.isqrt(n)) ** 2 == n]
+    The walrus operator assigns math.isqrt(n) to root and returns it in one step.
   modern_python3: |
-    match/case is Python's structural pattern matching (3.10+).
-    match value: case 200: ... case 404: ... case _: (wildcard/default)
-    Unlike if/elif, it supports destructuring, guards, and class patterns.
+    match code:
+        case 200: return "OK"
+        case 404: return "Not Found"
+        case 500: return "Internal Server Error"
+        case _:   return "Unknown"
   modern_python4: |
-    match guards add an extra condition to a case with `if`:
-    case n if n < 0: return "negative"
-    The guard is checked after the pattern matches; if False, the next case is tried.
+    match n:
+        case n if n < 0:  return "negative"
+        case 0:           return "zero"
+        case n if n < 10: return "small positive"
+        case _:           return "large positive"
   modern_python5: |
-    Class patterns match dataclass instances by field name:
-    case Circle(center=Point(x=cx, y=cy), radius=r):
-    Fields are matched structurally — you don't need to match all fields.
-    The matched variables (cx, cy, r) are bound in the case body.
+    match shape:
+        case Point(x=x, y=y): return f"point at ({x}, {y})"
+        case Circle(center=Point(x=cx, y=cy), radius=r): return f"circle at ({cx}, {cy}) r={r}"
+        case Rectangle(top_left=Point(x=x1,y=y1), bottom_right=Point(x=x2,y=y2)):
+            return f"rect from ({x1}, {y1}) to ({x2}, {y2})"
+        case _: return "unknown shape"

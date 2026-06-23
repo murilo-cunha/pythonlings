@@ -1,12 +1,17 @@
+"""
+try runs the risky code. except catches a specific exception type.
+else runs only if NO exception was raised. finally ALWAYS runs (cleanup).
+Pattern: try: result = op() except Err: handle() else: use(result) finally: cleanup()
+
+Implement safe_divide() using try/except/else/finally — return None on ZeroDivisionError,
+otherwise return the result.
+"""
+
 # I AM NOT DONE
 
 
 def safe_divide(a, b):
-    # Fix: implement using try/except/else/finally
-    # - catch ZeroDivisionError and return None
-    # - else block: return the result
-    # - finally block: always executed (no return needed there)
-    return 0.0  # Fix this into a try/except/else/finally structure
+    return 0.0
 
 
 log = []
@@ -22,16 +27,4 @@ def logged_divide(a, b):
         log.append("ok")
         return result
     finally:
-        log.append("done")  # Runs whether or not an exception occurred
-
-
-# DON'T EDIT THE TESTS
-assert safe_divide(10, 2) == 5.0
-assert safe_divide(10, 0) is None
-
-assert logged_divide(10, 2) == 5.0
-assert log == ["ok", "done"]
-
-log.clear()
-assert logged_divide(10, 0) is None
-assert log == ["error", "done"]
+        log.append("done")

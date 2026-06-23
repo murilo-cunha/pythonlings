@@ -1,22 +1,19 @@
 en:
   functional1: |
-    map(func, iterable) applies func to every item and returns an iterator.
-    filter(pred, iterable) keeps items where pred returns True.
-    Both return lazy iterators — wrap with list() to materialise the results.
+    squares:      list(map(lambda n: n**2, numbers))
+    evens:        list(filter(lambda n: n % 2 == 0, numbers))
+    even_squares: list(map(lambda n: n**2, filter(lambda n: n % 2 == 0, numbers)))
   functional2: |
-    reduce(func, iterable) accumulates items left-to-right.
-    reduce(lambda a, b: a * b, [1,2,3,4]) = ((1*2)*3)*4 = 24
-    For simple reductions, prefer sum(), max(), or min() when available.
+    product: reduce(lambda a, b: a * b, numbers)
+    maximum: reduce(lambda a, b: a if a > b else b, numbers)
   functional3: |
-    @lru_cache() memoises a function — it caches results keyed by arguments.
-    Repeated calls with the same args return the cached result instantly.
-    Transforms exponential recursion into linear for problems like Fibonacci.
+    Add @lru_cache() on the line immediately above def fib.
+    The parentheses () are required — it's @lru_cache(), not @lru_cache.
   functional4: |
-    partial(func, *args, **kwargs) returns a new callable with some args pre-filled.
-    square = partial(power, exponent=2) — then square(4) == 16.
-    Useful for adapting functions to the expected signature of callbacks or APIs.
+    square     = partial(power, exponent=2)
+    cube       = partial(power, exponent=3)
+    format_2dp = partial(format_number, decimals=2)
   functional5: |
-    itertools is a stdlib toolbox for efficient looping.
-    chain(*iterables) concatenates iterables lazily.
-    groupby(iterable, key) groups consecutive equal (or key-equal) elements.
-    islice(iterable, n) takes the first n elements from any iterator.
+    combined  = list(itertools.chain([1,2,3], [4,5,6]))
+    grouped   = [(k, list(v)) for k, v in itertools.groupby(data)]
+    first_five = list(itertools.islice(itertools.count(1), 5))

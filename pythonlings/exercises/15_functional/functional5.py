@@ -1,20 +1,18 @@
+"""
+itertools is a stdlib toolbox for efficient lazy iteration.
+chain(*iterables) concatenates iterables. groupby(it) groups consecutive equal elements.
+islice(it, n) takes the first n items from any iterator, including infinite ones.
+
+Fix combined, grouped, and first_five using itertools functions.
+"""
+
 # I AM NOT DONE
 
 import itertools
 
-# Fix each expression using itertools:
+combined = list([1, 2, 3]) + list([4, 5, 6])
 
-# Chain two lists into one iterator (convert to list for the assertion)
-combined = list([1, 2, 3]) + list([4, 5, 6])  # Fix: use itertools.chain
-
-# Group consecutive equal elements
 data = [1, 1, 2, 2, 2, 3, 1, 1]
-grouped = [(k, list(v)) for k, v in []]  # Fix: use itertools.groupby
+grouped = [(k, list(v)) for k, v in []]
 
-# Take the first 5 elements of an infinite count starting at 1
-first_five = []  # Fix: use itertools.islice(itertools.count(1), 5)
-
-# DON'T EDIT THE TESTS
-assert combined == [1, 2, 3, 4, 5, 6]
-assert grouped == [(1, [1, 1]), (2, [2, 2, 2]), (3, [3]), (1, [1, 1])]
-assert first_five == [1, 2, 3, 4, 5]
+first_five = []
