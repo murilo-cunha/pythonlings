@@ -1,30 +1,31 @@
-import argparse
 import os
-import sys
 
+import click
 import i18n
-
-from pythonlings.services.exercises import process_exercises, process_single_exercise
 
 i18n.config.set("locale", os.getenv("PYTHONLINGS_LANGUAGE", "en"))
 i18n.load_path.append("pythonlings/i18n")
-_ = i18n.t
+
+
+@click.group()
+def cli():
+    pass
+
+
+@cli.command()
+def start():
+    """Run exercises with file-watching."""
+    from pythonlings.services.exercises import process_exercises
+    process_exercises()
+
+
+@cli.command()
+@click.argument("exercise_name", required=False)
+def hint(exercise_name):
+    """Show the hint for the current (or named) exercise."""
+    from pythonlings.services.exercises import show_hint
+    show_hint(exercise_name)
 
 
 def run():
-    parser = argparse.ArgumentParser(description=_("p.description"))
-    parser.set_defaults(func=parser.print_help, type=bool)
-
-    subparsers = parser.add_subparsers(dest="command")
-    start_command = subparsers.add_parser("start", help=_("p.start_help"))
-    start_command.set_defaults(func=process_exercises)
-
-    exec_command = subparsers.add_parser("exec", help=_("p.exec_help"))
-    exec_command.set_defaults(func=process_single_exercise)
-
-    if len(sys.argv) == 1:
-        parser.print_help(sys.stderr)
-        sys.exit(1)
-
-    argx = parser.parse_args()
-    argx.func(argx)
+    cli()
