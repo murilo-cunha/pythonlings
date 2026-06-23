@@ -3,7 +3,7 @@ match/case is Python's structural pattern matching (3.10+).
 match value: case 200: ... case 404: ... case _: (wildcard/default)
 Unlike if/elif, it supports destructuring, guards, and class patterns.
 
-Rewrite http_status() using match/case to handle 200, 404, 500, and a default.
+Rewrite http_status(code) using match/case so it returns "OK" for 200, "Not Found" for 404, "Internal Server Error" for 500, and "Unknown" for any other code (case _).
 """
 
 # I AM NOT DONE

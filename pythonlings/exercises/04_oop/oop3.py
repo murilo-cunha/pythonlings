@@ -3,7 +3,7 @@ Use super().__init__(...) inside a child class to call the parent __init__.
 This ensures the parent initialises its own state before you add child-specific state.
 super() also works for regular method calls, not just __init__.
 
-Fix Dog.__init__ to call super().__init__(name) and fix speak() to extend the parent's result.
+Fix Dog.__init__ to call super().__init__(name) and then set self.breed = breed. Fix Dog.speak to return super().speak() + " — Woof!", so Dog("Rex", "Labrador").speak() == "Rex makes a sound — Woof!".
 """
 
 # I AM NOT DONE

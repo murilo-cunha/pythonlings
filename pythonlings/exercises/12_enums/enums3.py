@@ -3,8 +3,7 @@ Enum members can store tuple values and you can add methods to an Enum class.
 Methods can use self.value to access the stored value.
 This lets you attach behavior (conversion, formatting) directly to enum members.
 
-Implement to_hex() to return f"#{r:02x}{g:02x}{b:02x}" and from_hex() to look
-up a member by its hex string.
+Implement to_hex() to return f"#{r:02x}{g:02x}{b:02x}" (e.g. Color.RED.to_hex() == "#ff0000"). from_hex() is already written for you and relies on to_hex().
 """
 
 # I AM NOT DONE

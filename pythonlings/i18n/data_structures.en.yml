@@ -1,8 +1,8 @@
 en:
   data_structures1: |
     Start with [0, "hello", True, ["other list"]]. You need to:
-    set index 0 to 1, change index 1 to "world", change index 2 to False,
-    and pop the last element. Use my_list[idx] = value, my_list.pop().
+    set index 0 to 1, change index 1 to "world", and change index 2 to False.
+    Use my_list[idx] = value. Keep all four elements — do not pop.
   data_structures2: |
     prices["banana"] = 0.79 updates the price.
     del prices["cherry"] removes the key.

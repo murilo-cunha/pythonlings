@@ -3,7 +3,7 @@ __repr__ should return an unambiguous developer-facing string (e.g. ClassName(ar
 __str__ returns a user-friendly display string used by print() and f-strings.
 The REPL and repr() use __repr__; str() and f-strings use __str__.
 
-Implement both methods on Point so Point(1, 2) gives the correct repr and str.
+Implement __repr__ to return "Point(x, y)" (e.g. Point(1, 2) -> "Point(1, 2)") and __str__ to return "(x, y)" (e.g. Point(1, 2) -> "(1, 2)"), each interpolating self.x and self.y.
 """
 
 # I AM NOT DONE

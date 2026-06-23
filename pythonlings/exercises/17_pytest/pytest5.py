@@ -3,7 +3,7 @@ pytest.raises(ExceptionType) asserts that a block of code raises a specific exce
 Use it as a context manager: with pytest.raises(ValueError): ...
 Add match="pattern" to also check that the exception message matches a regex.
 
-Fix test_zero_division and test_parse_invalid to use pytest.raises correctly.
+Fix test_zero_division so it asserts that divide(1, 0) raises ZeroDivisionError — wrap the call in with pytest.raises(ZeroDivisionError):. (test_parse_invalid already passes; optionally tighten it with match="not positive".)
 """
 
 # I AM NOT DONE
