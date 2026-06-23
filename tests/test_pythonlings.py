@@ -4,8 +4,14 @@ from uuid import uuid4
 import pytest
 
 from pythonlings import __version__
+from pythonlings.display import build_layout
 from pythonlings.domain.exercises import Exercise
 from pythonlings.services.exercises import get_exercises_root
+
+
+def _sample_exercise(fixtures_dir):
+    epath = os.path.join(fixtures_dir, "1_examples", "exercise_sample_success.py")
+    return Exercise(epath)
 
 
 def test_version():
@@ -69,3 +75,25 @@ def test_exercise_companion_test_fails(fixtures_dir):
 
     assert exercise.error is True
     assert bool(exercise) is False
+
+
+def test_build_layout_compact_drops_code(fixtures_dir):
+    layout = build_layout(_sample_exercise(fixtures_dir), 1, 89, watching=True, height=10)
+    names = [c.name for c in layout.children]
+    assert "code" not in names
+    assert "status" in names
+    assert "footer" in names
+
+
+def test_build_layout_full_includes_code(fixtures_dir):
+    layout = build_layout(_sample_exercise(fixtures_dir), 1, 89, watching=True, height=40)
+    names = [c.name for c in layout.children]
+    assert "code" in names
+
+
+def test_build_layout_hint_region(fixtures_dir):
+    ex = _sample_exercise(fixtures_dir)
+    with_hint = build_layout(ex, 1, 89, watching=True, height=40, hint_text="x")
+    without_hint = build_layout(ex, 1, 89, watching=True, height=40, hint_text=None)
+    assert "hint" in [c.name for c in with_hint.children]
+    assert "hint" not in [c.name for c in without_hint.children]

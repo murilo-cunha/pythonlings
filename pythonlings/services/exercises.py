@@ -78,7 +78,8 @@ def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, to
     modified_event = threading.Event()
     hint_event = threading.Event()
     stop_event = threading.Event()
-    hint_text = None
+    hint_visible = False
+    hint_text = _get_hint_text(exercise)
 
     def _fire(event):
         modified_event.set()
@@ -93,14 +94,16 @@ def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, to
     kb_thread = _start_keyboard_listener(hint_event, stop_event)
     try:
         while True:
-            if hint_event.is_set() and hint_text is None:
-                hint_text = _get_hint_text(exercise)
-            live.update(build_layout(exercise, current, total, watching=True, hint_text=hint_text))
-            if modified_event.wait(timeout=0.5):
+            if hint_event.is_set():
+                hint_event.clear()
+                hint_visible = not hint_visible
+            shown = hint_text if hint_visible else None
+            live.update(build_layout(exercise, current, total, watching=True, hint_text=shown))
+            if modified_event.wait(timeout=0.2):
                 modified_event.clear()
                 exercise.is_not_done()
                 exercise.process()
-                live.update(build_layout(exercise, current, total, watching=False, hint_text=hint_text))
+                live.update(build_layout(exercise, current, total, watching=False, hint_text=shown))
                 if not exercise.error and not exercise.to_do:
                     break
     finally:
