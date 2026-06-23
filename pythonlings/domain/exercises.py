@@ -2,10 +2,16 @@ import os
 import subprocess as subp
 import sys
 from abc import ABC, abstractmethod
+from enum import Enum, auto
 
 import i18n
 
 _ = i18n.t
+
+
+class ExerciseKind(Enum):
+    NORMAL = auto()
+    PYTEST_MODULE = auto()
 
 
 class BaseExercise(ABC):
@@ -32,33 +38,15 @@ class Exercise:
         self.to_do = None
         self.is_not_done()
         self.package, self.name = self.exercise_metadata()
+        self.test_fp = os.path.join(os.path.dirname(self.fp), "test_" + os.path.basename(self.fp))
+        self.kind = ExerciseKind.PYTEST_MODULE if self.package == "pytest" else ExerciseKind.NORMAL
 
     def exercise_metadata(self):
         package = os.path.basename(os.path.dirname(self.fp)).split('_')[1]
         exercise_name = os.path.splitext(os.path.basename(self.fp))[0]
         return package, exercise_name
 
-    def __str__(self) -> str:
-        hint = _(f'{self.package}.{self.name}')
-        error_msg = f""""{self.fp} [{_('p.error_flag')}]
-        {hint}
-        {self.output}
-        """
-        success_msg = f"""{self.fp} [{_('p.success_flag')}]!
-        """
-        makeitpass_msg = f""""{self.fp} [{_('p.make_it_pass_flag')}]!
-        {hint}
-        """
-        if self.to_do:
-            return makeitpass_msg
-
-        return error_msg if self.error else success_msg
-
     def __bool__(self) -> bool:
-        """Bool protocol for class
-        Returns:
-            bool: True if the exercise pass, False otherwise.
-        """
         return not self.error
 
     def is_not_done(self) -> bool:
@@ -69,8 +57,12 @@ class Exercise:
     def process(self) -> None:
         if self.is_not_done():
             return
-        command = [sys.executable, self.fp]
-        r = subp.run(command, stdout=subp.PIPE, stderr=subp.PIPE)
+        if self.kind == ExerciseKind.PYTEST_MODULE:
+            cmd = [sys.executable, "-m", "pytest", self.fp, "-v", "--tb=short", "--no-header"]
+        elif os.path.exists(self.test_fp):
+            cmd = [sys.executable, "-m", "pytest", self.test_fp, "-v", "--tb=short", "--no-header"]
+        else:
+            cmd = [sys.executable, self.fp]
+        r = subp.run(cmd, stdout=subp.PIPE, stderr=subp.PIPE, cwd=os.path.dirname(self.fp))
         self.error = bool(r.returncode)
-        self.output = r.stderr if self.error else r.stdout
-        self.output = self.output.decode()
+        self.output = (r.stdout + r.stderr).decode(errors="replace")
