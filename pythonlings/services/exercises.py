@@ -36,7 +36,7 @@ def walk_exercises():
     for dirpath, dirnames, files in os.walk(root):
         dirnames[:] = sorted(d for d in dirnames if d != 'tests')
         for fname in sorted(files):
-            if fname.endswith(".py"):
+            if fname.endswith(".py") and not fname.startswith("test_"):
                 fps.append(os.path.join(dirpath, fname))
     return fps
 
@@ -90,7 +90,7 @@ def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, to
     observer = Observer()
     observer.schedule(handler, os.path.dirname(exercise.fp), recursive=False)
     observer.start()
-    _start_keyboard_listener(hint_event, stop_event)
+    kb_thread = _start_keyboard_listener(hint_event, stop_event)
     try:
         while True:
             if hint_event.is_set() and hint_text is None:
@@ -105,6 +105,8 @@ def observe_exercise_until_pass(exercise: Exercise, live: Live, current: int, to
                     break
     finally:
         stop_event.set()
+        if kb_thread is not None:
+            kb_thread.join(timeout=0.5)
         observer.stop()
         observer.join()
 
