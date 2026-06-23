@@ -1,13 +1,16 @@
 en:
   enums1: |
-    Enum creates a set of named constants. Members are singletons compared with `is`.
-    Access by name: Direction["NORTH"], by value: Direction(1), or directly: Direction.NORTH.
-    Enums prevent magic numbers and make code self-documenting.
+    Inside Direction(Enum):
+        NORTH = 1
+        SOUTH = 2
+        EAST = 3
+        WEST = 4
   enums2: |
-    IntEnum members are both Enum members AND ints — comparisons and arithmetic work.
-    auto() assigns incrementing values starting at 1 (unless __generate_next_value__ is overridden).
-    Use IntEnum when you need integer-compatible members (e.g. for database storage or flags).
+    Inside Priority(IntEnum):
+        LOW = auto()
+        MEDIUM = auto()
+        HIGH = auto()
+        CRITICAL = auto()
   enums3: |
-    Enum members can store tuple values: Color.RED = (255, 0, 0).
-    You can add methods to an Enum class like any regular class.
-    Useful for attaching behavior (conversion, formatting) directly to the enum members.
+    to_hex: return f"#{r:02x}{g:02x}{b:02x}"
+    from_hex is already implemented correctly — just fix to_hex.

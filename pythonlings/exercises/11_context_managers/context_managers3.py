@@ -1,3 +1,11 @@
+"""
+@contextmanager turns a generator function into a context manager.
+Write setup code, then yield the value (the body of the with block runs here),
+then teardown code. Code after yield always runs, even if an exception occurs.
+
+Yield an empty list from managed_list(), then sort it in place after the yield.
+"""
+
 # I AM NOT DONE
 
 from contextlib import contextmanager
@@ -5,16 +13,5 @@ from contextlib import contextmanager
 
 @contextmanager
 def managed_list():
-    # Fix: yield an empty list, then sort it in place after the with block
     items = []
     yield items
-    # Fix: sort items here (after yield)
-
-
-# DON'T EDIT THE TESTS
-with managed_list() as lst:
-    lst.append(3)
-    lst.append(1)
-    lst.append(2)
-
-assert lst == [1, 2, 3]  # sorted after the with block

@@ -1,17 +1,15 @@
 en:
   context_managers1: |
-    The with statement calls __enter__ on entry and __exit__ on exit — even if an
-    exception occurs. Use it for resources that must be closed/released: files,
-    connections, locks. open() returns a context manager that closes the file automatically.
+    with open(tmp_path, "w") as f: f.write("Hello, World!")
+    with open(tmp_path) as f: content = f.read()
   context_managers2: |
-    Implement __enter__(self) → return the resource, and __exit__(self, exc_type, exc_val, exc_tb).
-    __exit__ receives exception info (all None if no exception occurred).
-    Return True from __exit__ to suppress the exception; return False (or None) to re-raise it.
+    In __exit__: self.elapsed = time.monotonic() - self.start
+    The _time import at class level is already there — use time.monotonic() directly.
   context_managers3: |
-    @contextmanager turns a generator function into a context manager.
-    Write setup code, then yield the value, then teardown code.
-    The yield is the "body" of the with block — code after yield runs on __exit__.
+    After the yield line, add: items.sort()
+    Code after yield in a @contextmanager runs on __exit__ (after the with block).
   context_managers4: |
-    contextlib.suppress(*exceptions) silently ignores the listed exception types.
-    with suppress(FileNotFoundError): os.remove(path) — no try/except needed.
-    Only use it when ignoring the exception is the correct behaviour, not as a lazy catch-all.
+    Replace result2 = 1 / 0 with:
+        with suppress(ZeroDivisionError):
+            result2 = 1 / 0
+    The suppress context manager silently ignores the ZeroDivisionError.

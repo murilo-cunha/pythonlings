@@ -1,13 +1,14 @@
+"""
+"yield from iterable" delegates to another iterable, yielding each of its items.
+It's equivalent to: for item in iterable: yield item
+It also works with other generators, flattening them without extra loops.
+
+Use yield from inside chain() to yield all items from each iterable in turn.
+"""
+
 # I AM NOT DONE
 
 
 def chain(*iterables):
-    # Fix: yield all items from each iterable using "yield from"
     for it in iterables:
-        pass  # Fix: use yield from
-
-
-# DON'T EDIT THE TESTS
-result = list(chain([1, 2], [3, 4], [5]))
-assert result == [1, 2, 3, 4, 5]
-assert list(chain("ab", "cd")) == ["a", "b", "c", "d"]
+        pass

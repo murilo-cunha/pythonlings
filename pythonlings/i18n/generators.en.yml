@@ -1,17 +1,19 @@
 en:
   generators1: |
-    A generator function uses yield instead of return.
-    Calling it returns a generator object; values are produced lazily one at a time.
-    Python pauses at each yield and resumes when next() is called again.
+    Replace return [] with a loop using yield:
+        for i in range(n, 0, -1): yield i
+    Or the one-liner: yield from range(n, 0, -1)
   generators2: |
-    "yield from iterable" delegates to another iterable, yielding each of its items.
-    It's equivalent to: for item in iterable: yield item
-    Also works with other generators, flattening them without extra loops.
+    Replace pass with: yield from it
+    That's the entire fix — one line inside the for loop.
   generators3: |
-    To make a class iterable, implement __iter__ (returns self) and __next__
-    (returns the next value, raises StopIteration when exhausted).
-    for x in obj: calls iter(obj) then repeatedly calls next() until StopIteration.
+    In __next__:
+        if self.a > self.limit: raise StopIteration
+        value = self.a
+        self.a, self.b = self.b, self.a + self.b
+        return value
   generators4: |
-    Generators can be infinite — just never stop yielding.
-    Use itertools.islice(gen, n) to take only the first n values without consuming the rest.
-    Infinite generators are great for sequences like natural numbers, random streams, events.
+    Replace return with a while loop:
+        n = start
+        while True: yield n; n += 1
+    Or: yield from itertools.count(start)

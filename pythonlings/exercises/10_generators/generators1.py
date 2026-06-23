@@ -1,15 +1,13 @@
+"""
+A generator function uses yield instead of return. Calling it returns a lazy
+generator object; values are produced one at a time when iterated.
+Python pauses at each yield and resumes when the next value is requested.
+
+Make countdown() a generator that yields n, n-1, ..., 1 (stopping at 1).
+"""
+
 # I AM NOT DONE
 
 
 def countdown(n):
-    # Fix: make this a generator that yields n, n-1, ..., 1
-    return []  # Change to yield statements
-
-
-# DON'T EDIT THE TESTS
-import types
-
-gen = countdown(5)
-assert isinstance(gen, types.GeneratorType)
-assert list(gen) == [5, 4, 3, 2, 1]
-assert list(countdown(3)) == [3, 2, 1]
+    return []

@@ -1,3 +1,12 @@
+"""
+Enum members can store tuple values and you can add methods to an Enum class.
+Methods can use self.value to access the stored value.
+This lets you attach behavior (conversion, formatting) directly to enum members.
+
+Implement to_hex() to return f"#{r:02x}{g:02x}{b:02x}" and from_hex() to look
+up a member by its hex string.
+"""
+
 # I AM NOT DONE
 
 from enum import Enum
@@ -9,24 +18,12 @@ class Color(Enum):
     BLUE = (0, 0, 255)
 
     def to_hex(self) -> str:
-        # Fix: return the color as a hex string like "#ff0000"
         r, g, b = self.value
-        return ""  # Fix: use f"#{r:02x}{g:02x}{b:02x}"
+        return ""
 
     @classmethod
     def from_hex(cls, hex_str: str):
-        # Fix: look up a Color member by hex string
-        # hex_str is like "#ff0000"
         for member in cls:
             if member.to_hex() == hex_str:
                 return member
         raise ValueError(f"No color for {hex_str}")
-
-
-# DON'T EDIT THE TESTS
-assert Color.RED.to_hex() == "#ff0000"
-assert Color.GREEN.to_hex() == "#00ff00"
-assert Color.BLUE.to_hex() == "#0000ff"
-
-assert Color.from_hex("#ff0000") is Color.RED
-assert Color.from_hex("#0000ff") is Color.BLUE

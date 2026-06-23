@@ -1,19 +1,18 @@
+"""
+The with statement ensures a resource is properly closed after use, even if
+an exception occurs. open() returns a context manager that closes the file
+on __exit__. Pattern: with open(path, "w") as f: f.write("...")
+
+Write "Hello, World!" to tmp_path using with/open, then read it back.
+"""
+
 # I AM NOT DONE
 
 import tempfile
 import os
 
-# Write "Hello, World!" to a temp file and read it back using with/open
 tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False)
 tmp_path = tmp.name
 tmp.close()
 
-# Fix: write "Hello, World!" to tmp_path using `with open(...) as f`
-# YOUR CODE HERE
-
-# Fix: read the content back using `with open(...) as f`
-content = ""  # Fix this
-
-# DON'T EDIT THE TESTS
-assert content == "Hello, World!"
-os.unlink(tmp_path)
+content = ""
