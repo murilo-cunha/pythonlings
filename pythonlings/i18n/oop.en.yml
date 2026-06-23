@@ -1,23 +1,18 @@
 en:
   oop1: |
-    __repr__ should return an unambiguous developer-facing string (e.g. MyClass(arg)).
-    __str__ returns a user-friendly display string.
-    f-strings and print() use __str__; repr() and the REPL use __repr__.
+    __repr__: return f"Point({self.x}, {self.y})"
+    __str__: return f"({self.x}, {self.y})"
+    f-strings use __str__; repr() and the REPL use __repr__.
   oop2: |
-    __eq__ defines the == operator between instances.
-    If you define __eq__, also define __hash__ — otherwise your class
-    becomes unhashable (can't be used in sets or as dict keys).
-    Tip: return hash((self.r, self.g, self.b)) for a tuple-based hash.
+    __eq__: return self.r == other.r and self.g == other.g and self.b == other.b
+    __hash__: return hash((self.r, self.g, self.b))
+    Always define both together — Python unhashes a class if you add __eq__ without __hash__.
   oop3: |
-    Use super().__init__(...) inside a child class to call the parent's __init__.
-    This ensures the parent is properly initialised before you add child-specific state.
-    super() also works for regular method calls, not just __init__.
+    In Dog.__init__: super().__init__(name) then self.breed = breed.
+    In Dog.speak: return super().speak() + " — Woof!"
   oop4: |
-    @classmethod receives the class (cls) as first argument, not an instance.
-    Use it for alternative constructors: Temperature.from_fahrenheit(212).
-    @staticmethod receives no implicit first argument — it's a plain function
-    namespaced inside the class.
+    from_fahrenheit: return cls((f - 32) * 5 / 9)
+    is_freezing: return celsius <= 0
   oop5: |
-    __slots__ = ('x', 'y') tells Python to allocate only those two attributes.
-    Benefits: less memory per instance, faster attribute access, prevents typo-attributes.
-    Trade-off: you can no longer add arbitrary attributes dynamically.
+    Add __slots__ = ("x", "y") as a class variable, before __init__.
+    This is a class-level declaration, not an instance attribute.

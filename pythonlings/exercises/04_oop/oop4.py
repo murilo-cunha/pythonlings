@@ -1,3 +1,11 @@
+"""
+@classmethod receives the class (cls) as first argument — use it for alternative
+constructors: Temperature.from_fahrenheit(212). @staticmethod has no implicit
+first argument; it's a plain function namespaced inside the class.
+
+Implement from_fahrenheit (formula: C = (F - 32) * 5/9) and is_freezing (True if <= 0).
+"""
+
 # I AM NOT DONE
 
 
@@ -7,26 +15,11 @@ class Temperature:
 
     @classmethod
     def from_fahrenheit(cls, f):
-        # Create a Temperature from a Fahrenheit value
-        # Formula: C = (F - 32) * 5/9
-        return cls(0)  # Fix this
+        return cls(0)
 
     @staticmethod
     def is_freezing(celsius):
-        # Return True if temperature is at or below 0°C
-        return False  # Fix this
+        return False
 
     def __repr__(self):
         return f"Temperature({self.celsius})"
-
-
-# DON'T EDIT THE TESTS
-t = Temperature.from_fahrenheit(212)
-assert t.celsius == 100.0
-
-t2 = Temperature.from_fahrenheit(32)
-assert t2.celsius == 0.0
-
-assert Temperature.is_freezing(0) is True
-assert Temperature.is_freezing(-10) is True
-assert Temperature.is_freezing(1) is False

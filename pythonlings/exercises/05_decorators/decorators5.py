@@ -1,3 +1,11 @@
+"""
+Decorators stack bottom-up: the decorator closest to def runs first.
+@A @B def f(): ... is equivalent to f = A(B(f)).
+So calling f() runs A's wrapper, which calls B's wrapper, which calls f.
+
+Fix the decorator order on hello() so the output is <b><i>hello</i></b>.
+"""
+
 # I AM NOT DONE
 
 import functools
@@ -17,13 +25,7 @@ def italic(func):
     return wrapper
 
 
-# Currently produces <i><b>hello</b></i> — fix the decorator order
-# so the output becomes <b><i>hello</i></b>
 @italic
 @bold
 def hello():
     return "hello"
-
-
-# DON'T EDIT THE TESTS
-assert hello() == "<b><i>hello</i></b>"

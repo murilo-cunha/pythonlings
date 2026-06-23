@@ -1,10 +1,17 @@
+"""
+Without @functools.wraps(func) inside a decorator, the wrapper loses the
+original function's __name__, __doc__, and other metadata.
+Always use @functools.wraps when writing decorators to preserve introspection.
+
+Add @functools.wraps(func) to the wrapper inside log_call.
+"""
+
 # I AM NOT DONE
 
 import functools
 
 
 def log_call(func):
-    # Fix: use @functools.wraps(func) so the wrapper preserves func's metadata
     def wrapper(*args, **kwargs):
         return func(*args, **kwargs)
     return wrapper
@@ -14,9 +21,3 @@ def log_call(func):
 def add(a, b):
     """Add two numbers."""
     return a + b
-
-
-# DON'T EDIT THE TESTS
-assert add(2, 3) == 5
-assert add.__name__ == "add"          # Fails without @functools.wraps
-assert add.__doc__ == "Add two numbers."

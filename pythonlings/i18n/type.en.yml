@@ -1,22 +1,23 @@
 en:
   type_hints1: |
-    Type annotations document what types a function expects and returns.
-    Syntax: def func(param: int) -> str:
-    They don't enforce types at runtime but help editors and type-checkers.
+    def add(a: int, b: int) -> int: ...
+    def greet(name: str) -> str: ...
+    Annotations are just expressions assigned to __annotations__ — int and str, not strings.
   type_hints2: |
-    Python 3.10+ allows X | Y union syntax instead of Union[X, Y].
-    Use int | None instead of Optional[int].
-    This also works in isinstance(): isinstance(x, int | float).
+    def double(value: int | float) -> int | float: ...
+    def parse_id(raw: str) -> int | None: ...
+    Use the | operator (Python 3.10+), not Union[] from typing.
   type_hints3: |
-    TypeVar creates a placeholder type variable for generic functions.
-    T = TypeVar("T"); def first(items: list[T]) -> T: ...
-    This tells type-checkers: "if you pass list[str], you get back str".
+    def first(items: list[T]) -> T: ...
+    T is the TypeVar defined above. The annotation tells checkers: input list element type = return type.
   type_hints4: |
-    TypedDict creates a dict subtype with specific required keys and value types.
-    from typing import TypedDict
-    class Movie(TypedDict): title: str; year: int
-    Great for typing JSON-like data without full dataclass overhead.
+    class Movie(TypedDict):
+        title: str
+        year: int
+        rating: float
+    Each line is a TypedDict field declaration — same syntax as a dataclass but produces a dict subtype.
   type_hints5: |
-    NamedTuple combines the positional access of tuples with named attributes.
-    class Point(NamedTuple): x: float; y: float
-    Instances are immutable (like tuples) and support both p.x and p[0].
+    class Point(NamedTuple):
+        x: float
+        y: float
+    Two field declarations are all that's needed — NamedTuple generates __init__ and __new__ automatically.

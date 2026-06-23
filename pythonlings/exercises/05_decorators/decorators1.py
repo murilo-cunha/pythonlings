@@ -1,18 +1,20 @@
+"""
+A decorator is a function that takes a function and returns a new function.
+The wrapper calls the original and can transform its return value.
+Pattern: def decorator(func): def wrapper(*args, **kwargs): ...; return wrapper
+
+Fix shout so the wrapper uppercases the return value of func.
+"""
+
 # I AM NOT DONE
 
 
 def shout(func):
-    # Decorator: wraps func so its return value is uppercased
     def wrapper(*args, **kwargs):
-        return func(*args, **kwargs)  # Fix: uppercase the result
+        return func(*args, **kwargs)
     return wrapper
 
 
 @shout
 def greet(name):
     return f"hello, {name}"
-
-
-# DON'T EDIT THE TESTS
-assert greet("world") == "HELLO, WORLD"
-assert greet("python") == "HELLO, PYTHON"

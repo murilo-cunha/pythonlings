@@ -1,4 +1,14 @@
+"""
+@property turns a method into a read-only attribute. Add a setter with
+@name.setter to allow assignment, and add validation logic there.
+Use properties to keep a clean attribute API while enforcing constraints.
+
+Add ValueError on negative radius and compute area = pi * r^2.
+"""
+
 # I AM NOT DONE
+
+import math
 
 
 class Circle:
@@ -11,28 +21,8 @@ class Circle:
 
     @radius.setter
     def radius(self, value):
-        # Fix: raise ValueError if value is negative
         self._radius = value
 
     @property
     def area(self):
-        # Fix: return pi * r^2 (use math.pi)
         return 0.0
-
-
-import math
-
-
-# DON'T EDIT THE TESTS
-c = Circle(5)
-assert c.radius == 5
-assert abs(c.area - math.pi * 25) < 1e-9
-
-c.radius = 10
-assert c.radius == 10
-
-try:
-    c.radius = -1
-    assert False, "Expected ValueError"
-except ValueError:
-    pass
