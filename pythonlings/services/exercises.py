@@ -12,7 +12,10 @@ from pythonlings.display import build_layout, console
 from pythonlings.domain.exercises import Exercise
 
 try:
-    import select, tty, termios
+    import select
+    import termios
+    import tty
+
     _TTY_AVAILABLE = True
 except ImportError:
     _TTY_AVAILABLE = False
