@@ -1,0 +1,32 @@
+en:
+  docstrings1: |
+    Run `uv run ruff check --select D103 docstrings1.py` to see the issue.
+    Add a one-line docstring as the first statement inside `add`:
+        """Return the sum of a and b."""
+    It must end with a period.
+  docstrings2: |
+    Run `uv run ruff check --select D101,D102 docstrings2.py` to see the issues.
+    Add a docstring to the class (first line of the class body):
+        """A simple counter."""
+    and to the `increment` method (first line of its body):
+        """Increase the value by one and return it."""
+    Each must end with a period.
+  docstrings3: |
+    Run `uv run ruff check --select D100 docstrings3.py` to see the issue.
+    Comments (#) do not count. Add a module docstring as the FIRST statement,
+    right after the leading comments and before `GREETING`:
+        """Greeting constants for the module."""
+    It must end with a period.
+  docstrings4: |
+    Run `uv run ruff check --select D200,D210,D400 docstrings4.py` to see the issues.
+    Tidy the one-line docstring: no surrounding spaces inside the quotes,
+    keep it on one line, and end it with a period:
+        """Return the square of n."""
+  docstrings5: |
+    Run `uv run ruff check --select D205,D212 docstrings5.py` to see the issues.
+    Put the summary on the FIRST line right after the opening """, then a
+    blank line, then the description:
+        """Return a greeting for name.
+
+        The greeting is a friendly hello.
+        """

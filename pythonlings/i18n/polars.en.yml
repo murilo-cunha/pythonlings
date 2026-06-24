@@ -1,0 +1,11 @@
+en:
+  polars1: |
+    df = pl.DataFrame(data)
+  polars2: |
+    result = df.with_columns(
+        (pl.col("price") * 1.21).alias("with_tax")
+    ).filter(pl.col("price") > 15)
+  polars3: |
+    result = df.group_by("team").agg(
+        pl.col("points").sum().alias("total")
+    )

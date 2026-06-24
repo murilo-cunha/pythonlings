@@ -1,0 +1,10 @@
+en:
+  linting1: |
+    Let the formatter rewrite the file for you:
+        uv run ruff format linting1.py
+  linting2: |
+    Let ruff sort the imports for you:
+        uv run ruff check --select I --fix linting2.py
+  linting3: |
+    Find the unused import and the unused variable, then delete them:
+        uv run ruff check --select F linting3.py

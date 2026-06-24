@@ -1,0 +1,11 @@
+en:
+  duckdb1: |
+    answer = duckdb.sql("SELECT 42 AS answer").fetchone()[0]
+  duckdb2: |
+    con.execute("CREATE TABLE fruits (id INTEGER, name VARCHAR)")
+    con.execute("INSERT INTO fruits VALUES (1, 'apple'), (2, 'banana')")
+    n_rows = con.execute("SELECT COUNT(*) FROM fruits").fetchone()[0]
+  duckdb3: |
+    totals = con.execute(
+        "SELECT region, SUM(amount) AS total FROM sales GROUP BY region ORDER BY region"
+    ).fetchall()
